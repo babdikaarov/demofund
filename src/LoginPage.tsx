@@ -1,12 +1,11 @@
 // LoginPage.js
-import { Login, LoginForm} from "react-admin";
+import { Login, LoginForm, ToggleThemeButton} from "react-admin";
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, signInWithPopup, sendPasswordResetEmail  } from "firebase/auth";
 import { config } from "./providers/providers";
 import { CardContent, Dialog, DialogActions, DialogContent, DialogTitle, Button, TextField, Typography,Box } from '@mui/material';
 import { useState } from "react";
-/* import GoogleIcon from '@mui/icons-material/Google'; */
-import googleIcon from '../public/google-icon.png'
+import googleIcon from '../public/google-icon.svg'
 
 
 // Initialize Firebase
@@ -80,38 +79,49 @@ const CustomLoginForm = (props: JSX.IntrinsicAttributes) => {
             onClick={handleGoogleLogin} 
             fullWidth 
             variant="outlined"
-            startIcon={<img src={googleIcon} alt="Google Logo" style={{ width: 28, height: 28 }} />} 
-            style={{color: 'gray'}}
+            startIcon={
+               <img 
+                  src={googleIcon} 
+                  alt="Google Logo" 
+                  style={{ width: '28px', height: '28px'}} 
+               />
+            } // Inherit original colors
+            style={{ color: '#92ccfa' }} 
+/*             sx={{
+               backgroundColor:  '#fff'
+               
+            }} */
          >
             Sign in with Google
          </Button>
       </CardContent>
 
-
+{/*       <ToggleThemeButton/> */}
          
       <Button
          style={{
             textDecoration: 'underline',
             textDecorationThickness: '1.5px',
-            textDecorationColor: 'black', // Default underline color
-            color: 'black', // Default text color
+            textDecorationColor: 'gray', // Default underline color
+            color: "gray", // Default text color
             transition: 'all 0.3s ease', // Smooth transition for color change and opacity
          }} 
          onClick={handleReset}
          fullWidth
          onMouseEnter={(e) => {
-            e.target.style.color = 'blue'; 
-            e.target.style.textDecorationColor = 'blue'; 
+            e.target.style.color = '#92ccfa'; 
+            e.target.style.textDecorationColor = '#92ccfa'; 
             e.target.style.opacity = 0.8; // Add opacity change on hover
          }}
          onMouseLeave={(e) => {
-            e.target.style.color = 'black';
-            e.target.style.textDecorationColor = 'black';
+            e.target.style.color = 'gray';
+            e.target.style.textDecorationColor = 'gray';
             e.target.style.opacity = 1; // Revert opacity to default
          }}
       >
          Forgot Password
       </Button>
+      
 
          <Dialog open={open} onClose={handleClose}> 
             <DialogTitle>Send Password Reset</DialogTitle>
@@ -139,7 +149,7 @@ const CustomLoginForm = (props: JSX.IntrinsicAttributes) => {
                </Button>
             </DialogActions>
          </Dialog>
-   </Box>
+      </Box>
       </div>
    );
 };
