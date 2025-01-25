@@ -1,12 +1,13 @@
 // LoginPage.js
 import { Login, LoginForm } from "react-admin";
-import { initializeApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { config } from "./providers/providers";
+import { Button, CardContent } from "@mui/material";
+
+import { getAuth, GoogleAuthProvider, sendPasswordResetEmail, signInWithPopup } from "firebase/auth";
+import { app } from "./providers/providers";
 import ForgotPassword from "./ForgotPassword";
 
 // Initialize Firebase
-const app = initializeApp(config);
+
 const auth = getAuth(app);
 
 auth.languageCode = "en"; // Set language (optional)
@@ -32,13 +33,18 @@ const CustomLoginForm = (props: JSX.IntrinsicAttributes) => {
    };
 
    return (
-      <div>
+      <>
          <LoginForm {...props} />
-         <button onClick={handleGoogleLogin} style={{ marginTop: "20px", padding: "10px 20px" }}>
-            Sign in with Google
-         </button>
-         <ForgotPassword />
-      </div>
+         <CardContent>
+            <Button
+               children="Sign in with Google"
+               variant="outlined"
+               fullWidth
+               startIcon="@"
+               onClick={handleGoogleLogin}
+            />
+         </CardContent>
+      </>
    );
 };
 
