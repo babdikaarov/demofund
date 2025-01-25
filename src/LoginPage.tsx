@@ -9,10 +9,45 @@ import ForgotPassword from "./ForgotPassword";
 // Initialize Firebase
 
 const auth = getAuth(app);
-
 auth.languageCode = "en"; // Set language (optional)
 
 const CustomLoginForm = (props: JSX.IntrinsicAttributes) => {
+   const [open, setOpen] = useState(false);
+   const [email, setEmail] = useState('');
+   const [isSubmitting, setIsSubmitting] = useState(false);
+   const [message, setMessage] = useState('');
+
+   const handleClickOpen = () => {
+     setOpen(true);
+   };
+
+   const handleClose = () => {
+     setOpen(false);
+     setMessage(''); // Clear message on close
+   };
+
+   const handleEmailChange = (event) => {
+     setEmail(event.target.value);
+   };
+
+   const handleSendReset = () => {
+      setIsSubmitting(true);
+      sendPasswordResetEmail(auth, email)
+        .then(() => {
+          setIsSubmitting(false);
+          setMessage('A password reset email has been sent to your email address.');
+        })
+        .catch((error) => {
+          setIsSubmitting(false);
+          setMessage(`Error: ${error.message}`);
+        });
+   };
+
+   const handleReset = () => {
+      setOpen(true); // Open the dialog
+      setMessage(''); // Clear any previous message
+   };
+
    const handleGoogleLogin = async () => {
       try {
          // Perform Google Sign-In
@@ -47,6 +82,7 @@ const CustomLoginForm = (props: JSX.IntrinsicAttributes) => {
       </>
    );
 };
+
 
 const CustomLoginPage = (props: JSX.IntrinsicAttributes) => (
    <Login {...props}>
