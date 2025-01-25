@@ -8,7 +8,7 @@ export const FundsInList = () => (
          {/* <DateField source="createdAt" /> */}
          <DateField source="depositedAt" />
 
-         <ReferenceField source={`creaditorRef`} reference="users" label="From">
+         <ReferenceField source={`creaditorRef`} reference="users">
             <TextField source="firstName" />
          </ReferenceField>
       </Datagrid>
