@@ -1,20 +1,197 @@
-// in src/posts.jsx
-import { List, Datagrid, TextField, ReferenceField, ArrayField, ChipField, BooleanField } from "react-admin";
+import {
+   List,
+   Datagrid,
+   TextField,
+   ReferenceField,
+   ArrayField,
+   ChipField,
+   Show,
+   SimpleShowLayout,
+   SimpleForm,
+   Create,
+   useGetIdentity,
+   useNotify,
+   Button,
+   FunctionField,
+   ReferenceInput,
+   SelectInput,
+   RichTextField,
+   Confirm,
+   useUpdate,
+   useShowContext,
+   useGetList,
+   NumberField,
+   SingleFieldList,
+   TextInput,
+   useTranslate,
+} from "react-admin";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Stack } from "@mui/material";
 
-export const VotesList = () => (
-   <List>
-      <Datagrid>
-         <ReferenceField source={`pollRef`} reference="polls" label="Poll refference">
-            <ChipField source="title" size="medium" />
+export const VotesList = () => {
+   const t = useTranslate();
+   return (
+      <List>
+         <Datagrid bulkActionButtons={false}>
+            <ReferenceField source={`pollsId`} reference="polls" label={t("t.input.budgetPlan")}>
+               <TextField source="title" />
+            </ReferenceField>
+            <NumberField source="totalVoters" label={t("t.input.totalVoters")} />
+            <NumberField source="totalVoted" label={t("t.input.totalVoted")} />
+         </Datagrid>
+      </List>
+   );
+};
+export const VotesShow = () => {
+   return (
+      <Show>
+         <VotesEditLayout />
+      </Show>
+   );
+};
+
+const VotesEditLayout = () => {
+   const t = useTranslate();
+   const [open, setOpen] = useState(false);
+   const notify = useNotify();
+   const navigate = useNavigate();
+   const { record } = useShowContext();
+   const [update, { isPending }] = useUpdate();
+   const { data: identity } = useGetIdentity();
+
+   // Ensure record and identity are available before proceeding
+   if (!record || !identity) {
+      return <div>Loading...</div>;
+   }
+
+   const handleClick = () => setOpen(true);
+   const handleDialogClose = () => setOpen(false);
+
+   const handleConfirm = () => {
+      const resource = "votes";
+
+      // Find the voter's index in the `voters` array
+      const findVoterIndex = () => record.voters.findIndex((voter: { userId: string }) => voter.userId === identity.id);
+
+      const voterIndex = findVoterIndex();
+
+      if (voterIndex === -1) {
+         notify(t("t.notification.vote.eligable"), { type: "error" });
+         setOpen(false);
+         return;
+      }
+
+      // Ensure the voter hasn't already voted
+      if (record.voters[voterIndex].voted) {
+         notify(t("t.notification.vote.voteExist"), { type: "warning" });
+         setOpen(false);
+         return;
+      }
+
+      // Update the `voters` array
+      const updatedVoters = [...record.voters];
+      updatedVoters[voterIndex] = {
+         ...updatedVoters[voterIndex],
+         voted: true, // Mark as voted
+      };
+
+      const data = {
+         ...record,
+         voters: updatedVoters,
+         totalVoted: record.totalVoted + 1, // Increment total votes
+         updatedAt: new Date().toISOString(), // Update timestamp
+         updatedBy: identity.id, // Track user who updated
+      };
+
+      const params = { id: record.id, data, previousData: record };
+      const options = {
+         onSuccess: () => {
+            notify(t("t.notification.vote.success"), { type: "success" });
+         },
+         // eslint-disable-next-line @typescript-eslint/no-explicit-any
+         onError: (error: any) => {
+            notify(t("t.notification.vote.error"), { type: "error", error });
+         },
+      };
+
+      update(resource, params, options);
+      setOpen(false);
+   };
+
+   return (
+      <SimpleShowLayout>
+         <TextField source="title" />
+         <ReferenceField source={`pollsId`} reference="polls" label={t("t.input.pollReftitle")}>
+            <TextField source="title" />
          </ReferenceField>
-         <ArrayField source="list">
-            <Datagrid bulkActionButtons={false}>
-               <ReferenceField source={`userRef`} reference="users" label="Name">
-                  <TextField source="firstName" /> <TextField source="lastName" />
-               </ReferenceField>
-               <BooleanField source="vote" />
-            </Datagrid>
+         <ReferenceField source={`pollsId`} reference="polls" label={t("t.input.pollRefDescription")} link={false}>
+            <RichTextField source="description" />
+         </ReferenceField>
+         <ArrayField source="voters" label={t("t.input.voters")}>
+            <SingleFieldList linkType={false}>
+               <FunctionField
+                  render={(rec) => {
+                     return rec.voted ? (
+                        <ReferenceField source="userId" reference="users" link={false}>
+                           <ChipField source="firstName" color="success" />
+                        </ReferenceField>
+                     ) : (
+                        <ReferenceField source="userId" reference="users" link={false}>
+                           <ChipField source="firstName" color="default" />
+                        </ReferenceField>
+                     );
+                  }}
+               />
+            </SingleFieldList>
          </ArrayField>
-      </Datagrid>
-   </List>
-);
+
+         <NumberField source="totalVoters" label={t("t.input.totalVoters")} />
+         <NumberField source="totalVoted" label={t("t.input.totalVoted")} />
+         <FunctionField
+            render={() => (
+               <Stack direction={"row"} justifyContent={"space-between"}>
+                  <Button type="button" label={t("t.button.back")} size="large" onClick={() => navigate("/votes")} />
+                  <Button type="button" label={t("t.button.vote")} size="large" onClick={handleClick} />
+                  <Confirm
+                     isOpen={open}
+                     loading={isPending}
+                     title={t("t.dialog.vote.title")}
+                     content={t("t.dialog.vote.desc")}
+                     onConfirm={handleConfirm}
+                     onClose={handleDialogClose}
+                  />
+               </Stack>
+            )}
+         />
+      </SimpleShowLayout>
+   );
+};
+
+export const VotesCreate = () => {
+   const { data: userData } = useGetList("users");
+   const t = useTranslate();
+   const createVoters = () => {
+      const donors = userData?.filter((user) => user.role === "donor" || user.role === "admin");
+
+      return donors?.map((donor) => ({ userId: donor.id, voted: false }));
+   };
+
+   return (
+      <Create
+         transform={(data) => ({
+            ...data,
+            voters: createVoters(),
+            totalVoters: createVoters()?.length,
+            totalVoted: 0,
+         })}
+      >
+         <SimpleForm>
+            <ReferenceInput source="pollsId" reference="polls" label={t("t.input.pollReftitle")}>
+               <SelectInput emptyText={t("t.select.poll")} />
+            </ReferenceInput>
+            <TextInput source="title" />
+         </SimpleForm>
+      </Create>
+   );
+};

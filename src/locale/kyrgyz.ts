@@ -1,0 +1,257 @@
+import { TranslationMessages } from 'ra-core'
+// өзгөртүү
+const KyrgyzTranslation: TranslationMessages = {
+  myRoot: {
+    TitleEdit: 'Документтер %{name}',
+    TitleList: 'Кашкалдак - документ тапшыргандардын тизмеси',
+    status: {
+      pending: 'Күтүп жатат',
+      accepted: 'Кабыл алынды',
+      declined: 'Четке кагылды',
+      deleted: 'Корзинада',
+    },
+    action: {
+      accept: 'Кабыл алуу',
+      decline: 'Четке кагуу',
+      to_delete: 'Корзинага',
+    },
+    formSchema: {
+      BOTH_PARENTS: 'Толук үй-бүлө',
+      WIDOW: 'Жесир',
+      DIVORCED: 'Ажырашкан',
+      GUARDIAN: 'Камкорчу',
+    },
+
+    delete_title: 'ИНН %{inn} менен баланын маалыматтарын өчүрүү',
+    delete_content: 'Бул маалыматты өчүргүңүз келеби?',
+    document: {
+      delete_title: 'Документти өчүрүү "%{name}"',
+      delete_content: 'Бул документти өчүргүңүз келеби?',
+    },
+    bulk_delete_title:
+      'Маалымат жазуусун өчүрүү |||| %{smart_count} маалымат жазууларын өчүрүү',
+    bulk_delete_content:
+      'Бул маалымат жазуусун өчүргүңүз келеби? |||| Бул %{smart_count} маалымат жазууларын өчүргүңүз келеби?',
+    field: {
+      inn: 'ИНН',
+      firstName: 'Аты',
+      lastName: 'Фамилиясы',
+      phoneNumber: 'Телефон номери',
+      email: 'Электрондук почта',
+      createdAt: 'Түзүлгөн датасы',
+      status: 'Статус',
+      formSchema: 'Талапкер группасы',
+      listDocs: 'Документтер тизмеси',
+      downloadAll: 'Бардык документтер',
+      identity: 'Жеке маалыматтар',
+    },
+  },
+  ra: {
+    action: {
+      add_filter: 'Чыпка кошуу',
+      add: 'Кошуу',
+      back: 'Артка',
+      bulk_actions:
+        '1 тандалды |||| %{smart_count} тандалды |||| %{smart_count} тандалды',
+      cancel: 'Жокко чыгаруу',
+      clear_array_input: 'Тизмени тазалоо',
+      clear_input_value: 'Таза',
+      clone: 'Дубликат',
+      confirm: 'Ырастоо',
+      create: 'Түзүү',
+      create_item: '%{item} түзүү',
+      delete: 'Жок кылуу',
+      edit: 'өгөртүү',
+      export: 'Экспорт',
+      list: 'Тизме',
+      refresh: 'Жаңыртуу',
+      remove_filter: 'Чыпканы алып салуу',
+      remove_all_filters: 'Бардык издөө чыпкаларын алып салыңыз',
+      remove: 'Жок кылуу',
+      save: 'Сактоо',
+      search: 'Издөө',
+      select_all: 'Баарын танда',
+      select_row: 'Бул жазууну тандаңыз',
+      show: 'Көрүү',
+      sort: 'Сорттоо',
+      undo: 'Жокко чыгаруу',
+      unselect: 'Тандалган эмес',
+      expand: 'Ачпа',
+      close: 'Жабуу',
+      open_menu: 'Менюну ачуу',
+      close_menu: 'Менюну жабуу',
+      update: 'Жаңыртуу',
+      move_up: 'Өйдө жылдыруу',
+      move_down: 'Төмөнгө жылдыруу',
+      open: 'Ач',
+      toggle_theme: 'Теманы алмаштыруу',
+      select_columns: 'Мамычалар',
+      update_application: 'Колдонмону жаңыртыңыз',
+    },
+    boolean: {
+      true: 'Ооба',
+      false: 'Жок',
+      null: ' ',
+    },
+    page: {
+      create: '%{name} түзүү',
+      dashboard: 'Башкы бет',
+      edit: '%{name} %{recordRepresentation}',
+      error: 'Бир жерден ката кетти',
+      list: '%{name}',
+      loading: 'Жүктөө',
+      not_found: 'Табылган жок',
+      show: '%{name} %{recordRepresentation}',
+      empty: 'Жок %{name}.',
+      invite: 'Дагы бирөөнү кошкуңуз келеби?',
+    },
+    input: {
+      file: {
+        upload_several:
+          'Файлдарды бул жерге сүйрөңүз же тандоо үчүн чыкылдатыңыз.',
+        upload_single: 'Файлды бул жерге сүйрөңүз же тандоо үчүн чыкылдатыңыз.',
+      },
+      image: {
+        upload_several:
+          'Сүрөттөрдү бул жерге сүйрөп барып таштаңыз же тандоо үчүн чыкылдатыңыз.',
+        upload_single:
+          'Сүрөттү бул жерге сүйрөңүз же тандоо үчүн чыкылдатыңыз.',
+      },
+      references: {
+        all_missing: 'Тиешелүү маалымат табылган жок',
+        many_missing: 'Байланышкан маалыматтардын айрымдары жеткиликтүү эмес',
+        single_missing: 'Шилтемеленген объект жеткиликтүү эмес',
+      },
+      password: {
+        toggle_visible: 'Сырсөздү жашыруу',
+        toggle_hidden: 'Сыр сөздү көрсөтүү',
+      },
+    },
+    message: {
+      about: 'Шилтеме',
+      are_you_sure: 'Баары туурабы?',
+      auth_error: 'Аутентификация токенин текшерүүдө ката кетти',
+      bulk_delete_content:
+        '%{name} чын эле жок кылгыңыз келеби? |||| %{smart_count} объектти чын эле жок кылгыңыз келеби? |||| %{smart_count} объектти чын эле жок кылгыңыз келеби?',
+      bulk_delete_title:
+        '%{name} Жок кылуу |||| %{smart_count} %{name} Жок кылуу |||| %{smart_count} %{name} Жок кылуу',
+      bulk_update_content:
+        'Чын эле жаңырткыңыз келеби %{name}? |||| Чын эле жаңырткыңыз келеби? %{smart_count} объектов?',
+      bulk_update_title:
+        '%{name} жаңыртуу |||| %{smart_count} %{name} жаңыртуу',
+      clear_array_input: 'Чын эле тизмени толугу менен тазалагыңыз келеби?',
+      delete_content: 'Бул объектти чын эле жок кылгыңыз келеби?',
+      delete_title: '%{name} #%{id} жок кылуу',
+      details: 'Сүрөттөмө',
+      error: 'Сурам катага туш болду жана аны аягына чыгаруу мүмкүн эмес',
+      invalid_form: 'Анкета туура эмес толтурулган, каталарды текшериңиз',
+      loading: 'Жүктөлүүдө, күтө туруңуз...',
+      no: 'Жок',
+      not_found: 'URL катасы же сиз туура эмес шилтемени басып жатасыз',
+      yes: 'Ооба',
+      unsaved_changes:
+        'Кээ бир өзгөртүүлөрүңүз сакталган жок. Чын эле аларга көңүл бургуңуз келеби?',
+    },
+    navigation: {
+      no_results: 'Эч натыйжа табылган жок',
+      no_more_results:
+        '%{page} барагынын номерлөө чегинен тышкары, мурункуну колдонуп көрүңүз',
+      page_out_of_boundaries: '%{page} барагынын чегинен тышкары',
+      page_out_from_end: 'Акыркы баракка жылдыруу мүмкүн эмес',
+      page_out_from_begin: 'Барактын номери 1ден аз болбошу керек',
+      page_range_info: '%{offsetBegin}-%{offsetEnd} ичинен %{total}',
+      partial_page_range_info: '%{offsetBegin}-%{offsetEnd} ашык %{offsetEnd}',
+      current_page: 'Бет %{page}',
+      page: '%{page} баракта',
+      first: 'Биринчи бетке',
+      last: 'Акыркы бетке',
+      next: 'Кийинки',
+      prev: 'Мурунку',
+      previous: 'Мурунку',
+      page_rows_per_page: 'Ар бир беттеги саптар:',
+      skip_nav: 'Мазмунга өтүү',
+    },
+    sort: {
+      sort_by: '%{field} %{order} боюнча сорттоо',
+      ASC: 'өсүү',
+      DESC: 'азаюу',
+    },
+    auth: {
+      auth_check_error: 'Сураныч улантуу үчүн кириңиз.',
+      user_menu: 'Профиль',
+      username: 'Колдонуучунун аты',
+      password: 'Пароль',
+      sign_in: 'Кирүү',
+      sign_in_error: 'Аутентификация ишке ашкан жок, кайра аракет кылыңыз',
+      logout: 'Чыгуу',
+    },
+    notification: {
+      updated:
+        'Элемент жаңыртылды |||| %{smart_count} жаңыртылды |||| %{smart_count} жаңыртылды',
+      created: 'Элемент түзүлгөн',
+      deleted:
+        'Элемент өчүрүлдү |||| %{smart_count} өчүрүлдү |||| %{smart_count} өчүрүлдү',
+      bad_item: 'Элемент жараксыз',
+      item_doesnt_exist: 'Элемент жок',
+      http_error: 'Сервер катасы',
+      data_provider_error: 'dataProvider катасы, консолуңузду текшериңиз',
+      i18n_error: 'Көрсөтүлгөн тил үчүн котормо жүктөлгөн жок',
+      canceled: 'Операция жокко чыгарылды',
+      logged_out: 'Сеансыңыз аяктады, кайра туташып/кирүүгө аракет кылыңыз',
+      not_authorized: 'Бул ресурска кирүү мүмкүнчүлүгүңүз жок',
+      application_update_available: 'Колдонмонун жаңы версиясы бар.',
+    },
+    validation: {
+      required: 'Милдеттүү талаа',
+      minLength: 'Символдордун минималдуу саны %{min}',
+      maxLength: 'Символдордун максималдуу саны %{min}',
+      minValue: 'Минималдуу маани %{min}',
+      maxValue: 'Мааниси %{max} же андан аз болушу мүмкүн',
+      number: 'Сан болушу керек',
+      email: 'Туура эмес электрондук почта',
+      oneOf: 'Төмөнкүлөрдүн бири болушу керек: %{options}',
+      regex: 'Форматта болушу керек (regexp): %{pattern}',
+      unique: 'Уникалдуу болушу керек',
+    },
+    saved_queries: {
+      label: 'Сакталган сурамдар',
+      query_name: 'Запрсостун аты',
+      new_label: 'Учурдагы сурамды сактоо...',
+      new_dialog_title: 'Учурдагы суроо-талап катары сактоо',
+      remove_label: 'Сакталган сурамды жок кылуу',
+      remove_label_with_name: '"%{name}" сурамды жок кылуу',
+      remove_dialog_title: 'Сакталган сурам жок кылынсынбы?',
+      remove_message:
+        'Бул өтүнүчтү сакталган сурамдарыңыздын тизмесинен чын эле алып салгыңыз келеби?',
+      help: 'Тизмени чыпкалап, сурамды кийинчерээк сактоо үчүн',
+    },
+    configurable: {
+      customize: 'Тууралоо',
+      configureMode: 'Бул баракты ыңгайлаштыруу',
+      inspector: {
+        title: 'Инспектор',
+        content:
+          'Ыңгайлаштыруу үчүн колдонмонун UI элементтеринин үстүнө өтүңүз',
+        reset: 'Жөндөөлөрдү баштапкы абалга келтирүү',
+        hideAll: 'Баарын жашыруу',
+        showAll: 'Баарын көрсөтүү',
+      },
+      Datagrid: {
+        title: 'Маалымат таблицасы',
+        unlabeled: 'Аты жок тилке #%{column}',
+      },
+      SimpleForm: {
+        title: 'Форма',
+        unlabeled: 'Аты жок киргизүү талаасы #%{input}',
+      },
+      SimpleList: {
+        title: 'Тизме',
+        primaryText: 'Негизги текст',
+        secondaryText: 'Кошумча текст',
+        tertiaryText: 'Үчүнчү текст',
+      },
+    },
+  },
+}
+
+export default KyrgyzTranslation
