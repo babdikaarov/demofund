@@ -2,16 +2,16 @@
 import { Admin, Authenticated, CustomRoutes, Resource, useTranslate } from "react-admin";
 import { Route } from "react-router-dom";
 import { authProvider, dataProvider } from "./providers/providers";
-import { CustomLoginPage } from "./Components/LoginPage";
+import { CustomLoginPage } from "./components/LoginPage";
 import { UsersEdit, UsersList, UsersShow } from "./Resources/Users";
 import { PollsCreate, PollsEdit, PollsList, PollsShow } from "./Resources/Polls";
 import { VotesCreate, VotesList, VotesShow } from "./Resources/Votes";
 import { FundsOutCreate, FundsOutEdit, FundsOutList, FundsOutShow } from "./Resources/OutList";
-import { MyLayout } from "./Components/Layout";
+import { MyLayout } from "./components/Layout";
 import { FundsInList, FundsInShow } from "./Resources/FundsIn/ListShow";
 import { FundsInCreate } from "./Resources/FundsIn/Create";
 import { FundsInEdit } from "./Resources/FundsIn/Edit";
-import { StatisticsShow } from "./Components/Statistics";
+import { StatisticsShow } from "./components/Statistics";
 import {
    BeneficiariesCreate,
    BeneficiariesEdit,
@@ -24,10 +24,10 @@ import ThumbsUpDownOutlinedIcon from "@mui/icons-material/ThumbsUpDownOutlined";
 import VolunteerActivismOutlinedIcon from "@mui/icons-material/VolunteerActivismOutlined";
 import CampaignOutlinedIcon from "@mui/icons-material/CampaignOutlined";
 import PeopleAltOutlinedIcon from "@mui/icons-material/PeopleAltOutlined";
-import Navigation from "./Components/Navigation";
+import Navigation from "./components/Navigation";
 import polyglotI18nProvider from "ra-i18n-polyglot";
 import { translations } from "./locale/index";
-import Dashboard from "./Components/Dashboard";
+import Dashboard from "./components/Dashboard";
 const tCallBack = (l: string) => {
    return translations[l as keyof typeof translations];
 };
