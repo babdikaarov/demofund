@@ -27,6 +27,7 @@ import PeopleAltOutlinedIcon from "@mui/icons-material/PeopleAltOutlined";
 import Navigation from "./Components/Navigation";
 import polyglotI18nProvider from "ra-i18n-polyglot";
 import { translations } from "./locale/index";
+import Dashboard from "./Components/Dashboard";
 const tCallBack = (l: string) => {
    return translations[l as keyof typeof translations];
 };
@@ -47,6 +48,7 @@ const App = () => {
          dataProvider={dataProvider}
          authProvider={authProvider}
          loginPage={CustomLoginPage}
+         dashboard={Dashboard}
       >
          <CustomRoutes>
             <Route
