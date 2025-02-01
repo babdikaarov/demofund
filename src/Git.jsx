@@ -1,3 +1,0 @@
-/* git push origin main
-git branch
-git push origin ramis */
