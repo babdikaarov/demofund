@@ -3,7 +3,6 @@ import {
    Datagrid,
    Edit,
    List,
-   NumberInput,
    SimpleForm,
    TextField,
    NumberField,
@@ -16,21 +15,43 @@ import {
    FunctionField,
    Button,
    DeleteButton,
+   useGetIdentity,
+   TopToolbar,
+   FilterLiveSearch,
+   ExportButton,
+   NumberInput,
+   useGetList,
+   Link,
 } from "react-admin";
 import { useNavigate } from "react-router-dom";
-import { Stack } from "@mui/material";
+import { Chip, Stack } from "@mui/material";
 export const BeneficiariesList: React.FC = () => {
    const t = useTranslate();
+   const { data: userData, isPending } = useGetIdentity();
+   if (isPending) return null;
+
    return (
-      <List>
-         <Datagrid>
+      <List
+         actions={
+            <TopToolbar>
+               <Stack
+                  width={"100%"}
+                  spacing={2}
+                  direction={"row"}
+                  alignItems={"flex-end"}
+                  justifyContent={"space-between"}
+               >
+                  <FilterLiveSearch source="firstName" label={t("t.filter.searchByName")} />
+                  <ExportButton disabled={userData!.role === "guest"} />
+               </Stack>
+            </TopToolbar>
+         }
+      >
+         <Datagrid bulkActionButtons={false}>
             <TextField source="firstName" label={t("t.input.fName")} />
             <TextField source="lastName" label={t("t.input.lName")} />
             <NumberField source="totalBenefit" label={t("t.input.totalBenefit")} />
             <NumberField source="totalGrants" label={t("t.input.totalGrants")} />
-            {/* <ReferenceArrayField source="beneficiariesId" reference="fundsOut" label={t("t.input.refToDonation")}>
-               <ChipField label={t("t.input.refToDonation")} source="id" />
-            </ReferenceArrayField> */}
          </Datagrid>
       </List>
    );
@@ -38,6 +59,9 @@ export const BeneficiariesList: React.FC = () => {
 export const BeneficiariesShow: React.FC = () => {
    const t = useTranslate();
    const navigate = useNavigate();
+   const { data, isPending } = useGetList("fundsOut");
+   if (isPending) return null;
+   console.log(data);
    return (
       <Show>
          <SimpleShowLayout>
@@ -49,9 +73,29 @@ export const BeneficiariesShow: React.FC = () => {
                <ChipField label={t("t.input.refToDonation")} source="givenAt" />
             </ReferenceArrayField>
             <FunctionField
+               render={(record) =>
+                  data!.map((el, key) => {
+                     if (record.id == el.beneficiariesId) {
+                        return (
+                           <Link to={`/fundsOut/${el.id}/show`} target="_blank">
+                              <Chip key={key} label={el.givenAt} onClick={() => console.log("")} />
+                           </Link>
+                        );
+                     } else {
+                        return null;
+                     }
+                  })
+               }
+            />
+            <FunctionField
                render={() => (
                   <Stack direction={"row"} justifyContent={"space-between"}>
-                     <Button type="button" label={t("t.button.back")} size="large" onClick={() => navigate("/polls")} />
+                     <Button
+                        type="button"
+                        label={t("t.button.back")}
+                        size="large"
+                        onClick={() => navigate("/beneficiaries")}
+                     />
                      <DeleteButton />
                   </Stack>
                )}
@@ -83,8 +127,8 @@ export const BeneficiariesCreate: React.FC = () => {
             <TextInput source="firstName" label={t("t.input.fName")} />
             <TextInput source="lastName" label={t("t.input.tName")} />
             <TextInput inputMode="tel" source="phone" label={t("t.input.phone")} />
-            <NumberInput inputMode="numeric" source="totalBenefit" label={t("t.input.totalBenefit")} />
-            <NumberInput inputMode="numeric" source="totalGrants" label={t("t.input.totalGrants")} />
+            {/* <NumberInput inputMode="numeric" source="totalBenefit" label={t("t.input.totalBenefit")} />
+            <NumberInput inputMode="numeric" source="totalGrants" label={t("t.input.totalGrants")} /> */}
          </SimpleForm>
       </Create>
    );

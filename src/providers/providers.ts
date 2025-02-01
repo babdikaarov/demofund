@@ -192,7 +192,7 @@ const FileResources: Record<string, string> = {
 
 const StatsRelUpdateResources: Record<string, string> = {
    users: "role",
-   fundsIn: "isVerifed",
+   fundsIn: "isVerified",
    fundsOut: "amount",
 };
 
@@ -218,9 +218,9 @@ export const dataProvider = {
             const amount = data[field];
             if (amount > 0) {
                await createSingleDataDB(stats, "1", {
-                  totalPayments: totalPayments == 0 ? 0 : totalPayments - 1,
+                  totalPayments: totalPayments + 1,
                   totalSumPayments: totalSumPayments + amount,
-                  currentFund: currentFund + amount,
+                  currentFund: currentFund - amount,
                });
             }
          }
@@ -231,6 +231,8 @@ export const dataProvider = {
    async delete(resource: string, params: DeleteParams) {
       const { id, previousData } = params;
       // update stats
+      console.log(params);
+
       if (resource in StatsRelUpdateResources) {
          const stats = "stats";
          const currentStats = await getSingleDataDB(stats, "1");
@@ -251,7 +253,8 @@ export const dataProvider = {
                   totalDonors: totalDonors == 0 ? 0 : totalDonors - 1,
                });
             }
-         } else if (resource == "fundsIn") {
+         }
+         if (resource == "fundsIn") {
             const isVerifed = previousData[field];
             console.log(isVerifed);
 
@@ -262,15 +265,15 @@ export const dataProvider = {
                   currentFund: currentFund - previousData["amount"],
                });
             }
-         } else if (resource == "fundsOut") {
+         }
+         if (resource == "fundsOut") {
             const amount = previousData[field];
-            if (amount > 0) {
-               await createSingleDataDB(stats, "1", {
-                  totalPayments: totalPayments == 0 ? 0 : totalPayments - 1,
-                  totalSumPayments: totalSumPayments - amount,
-                  currentFund: currentFund + amount,
-               });
-            }
+            console.log(amount);
+            await createSingleDataDB(stats, "1", {
+               totalPayments: totalPayments == 0 ? 0 : totalPayments - 1,
+               totalSumPayments: totalSumPayments - amount,
+               currentFund: currentFund + amount,
+            });
          }
       }
       // delete from firebase storage
@@ -310,40 +313,46 @@ export const dataProvider = {
       // handle stats update
       if (resource in StatsRelUpdateResources) {
          const stats = "stats";
+         console.log("updating resoruce", resource, ":", StatsRelUpdateResources);
+
          const currentStats = await getSingleDataDB(stats, "1");
          const field = StatsRelUpdateResources[resource];
+         console.log(currentStats);
+         console.log(field);
 
          if (currentStats.exists) {
             const currentData = currentStats.snap!;
+            console.log(currentData);
             const totalDonors = currentData.totalDonors;
             const totalSumDonations = currentData.totalSumDonations;
             const currentFund = currentData.currentFund;
             const totalDonations = currentData.totalDonations;
             const totalSumPayments = currentData.totalSumPayments;
-            const totalPayments = currentData.totalPayments;
-            console.log(previousData[field]);
+            console.log(previousData[field], " ", data[field]);
 
             if (resource == "users") {
                if (previousData[field] === "guest" && data[field] !== "guest") {
                   await createSingleDataDB(stats, "1", {
-                     totalDonors: totalDonors == 0 ? 0 : totalDonors + 1,
+                     totalDonors: totalDonors + 1,
                   });
                }
                if (previousData[field] !== "guest" && data[field] === "guest") {
                   await createSingleDataDB(stats, "1", {
-                     totalDonors: totalDonors == 0 ? 0 : totalDonors - 1,
+                     totalDonors: totalDonors - 1,
                   });
                }
             }
             if (resource == "fundsIn") {
-               console.log(previousData.isVerifed);
-               if (!previousData.isVerifed && data.isVerifed) {
+               console.log(previousData[field]);
+               if (!previousData[field] && data[field]) {
+                  console.log("adding donor to totalDonors");
                   await createSingleDataDB(stats, "1", {
-                     totalDonations: totalDonations == 0 ? 0 : totalDonations + 1,
+                     totalDonations: totalDonations + 1,
                      totalSumDonations: totalSumDonations + previousData.amount,
                      currentFund: currentFund + previousData.amount,
                   });
-               } else if (previousData.isVerifed && !data.isVerifed) {
+               } else if (previousData[field] && !data[field]) {
+                  console.log("removing donor from totalDonors");
                   await createSingleDataDB(stats, "1", {
                      totalDonations: totalDonations == 0 ? 0 : totalDonations - 1,
                      totalSumDonations: totalSumDonations - previousData["amount"],
@@ -352,14 +361,10 @@ export const dataProvider = {
                }
             }
             if (resource == "fundsOut") {
-               const amount = previousData[field];
-               if (amount > 0) {
-                  await createSingleDataDB(stats, "1", {
-                     totalPayments: totalPayments == 0 ? 0 : totalPayments + 1,
-                     totalSumPayments: totalSumPayments + previousData["amount"],
-                     currentFund: currentFund - previousData["amount"],
-                  });
-               }
+               await createSingleDataDB(stats, "1", {
+                  totalSumPayments: totalSumPayments - previousData[field] + data[field],
+                  currentFund: currentFund + previousData[field] - data[field],
+               });
             }
          }
       }

@@ -22,7 +22,7 @@ const englishMessages: TranslationMessages = {
       button: {
          back: "Back",
          vote: "Vote",
-         profile: "User settings"
+         profile: "User settings",
       },
       input: {
          photoURL: "photoURL",
@@ -119,11 +119,11 @@ const englishMessages: TranslationMessages = {
          stats: "Statistics",
          nav: "Navigation",
          fundsIn: "Donations",
-         beneficiaries: "Beneficiaries",
          users: "Donors",
-         polls: "Budget Plan",
-         votes: "Votes",
-         fundsOut: "Payments",
+         polls: "%{order}: Budget Plan",
+         votes: "%{order}: Votes",
+         beneficiaries: "%{order}: Beneficiaries",
+         fundsOut: "%{order}: Payments",
       },
       statistics: {
          title_1: "Total",

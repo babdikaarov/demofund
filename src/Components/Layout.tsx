@@ -37,7 +37,7 @@ export const MyLayout = ({ children }: LayoutProps) => {
                   zIndex: 1000,
                }}
             >
-               <Fab variant="circular" type="button" size="large" color="primary">
+               <Fab variant="circular" type="button" size="large" color="info">
                   <PinchIcon />
                </Fab>
             </Link>

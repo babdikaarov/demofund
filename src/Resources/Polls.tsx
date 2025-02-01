@@ -23,14 +23,36 @@ import {
    NumberField,
    RadioButtonGroupInput,
    useTranslate,
+   useGetIdentity,
+   TopToolbar,
+   FilterLiveSearch,
+   ExportButton,
 } from "react-admin";
 import { Stack } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 export const PollsList = () => {
    const t = useTranslate();
+    const { data: userData, isPending } = useGetIdentity();
+    if (isPending) return null;
+   
    return (
-      <List>
+      <List
+         actions={
+            <TopToolbar>
+               <Stack
+                  width={"100%"}
+                  spacing={2}
+                  direction={"row"}
+                  alignItems={"flex-end"}
+                  justifyContent={"space-between"}
+               >
+                  <FilterLiveSearch source="title" label={t("t.filter.searchByTitle")} />
+                  <ExportButton disabled={userData!.role === "guest"} />
+               </Stack>
+            </TopToolbar>
+         }
+      >
          <Datagrid bulkActionButtons={false}>
             {/* <ShowButton /> */}
             <TextField source="title" label={t("t.input.title")} />

@@ -31,7 +31,7 @@ export const FundsOutList = () => {
    const t = useTranslate();
    return (
       <List>
-         <Datagrid>
+         <Datagrid bulkActionButtons={false}>
             <TextField source="amount" label={t("t.input.amount")} />
             <DateField source="createdAt" label={t("t.input.createdAt")} />
             <MyFileField recordKey="givenAt" source="reciept.src" label={t("t.input.reciept")} />
@@ -118,13 +118,26 @@ export const FundsOutCreate = () => {
                label={t("t.input.amount")}
             />
             <ReferenceInput source="beneficiariesId" reference="beneficiaries">
-               <SelectInput source="firstName" emptyText={t("t.select.noBeneficiar")} label={t("t.input.beneficiar")} />
+               <SelectInput
+                  validate={required()}
+                  source="firstName"
+                  emptyText={t("t.select.noBeneficiar")}
+                  label={t("t.input.beneficiar")}
+               />
             </ReferenceInput>
             <ReferenceInput source="pollsId" reference="polls">
-               <SelectInput emptyText={t("t.select.noPollSelected")} label={t("t.input.pollReftitle")} />
+               <SelectInput
+                  validate={required()}
+                  emptyText={t("t.select.noPollSelected")}
+                  label={t("t.input.pollReftitle")}
+               />
             </ReferenceInput>
             <ReferenceInput source="votesId" reference="votes" label={t("t.input.votes")}>
-               <SelectInput emptyText={t("t.select.noVoteSelected")} label={t("t.input.basedOnVotes")} />
+               <SelectInput
+                  validate={required()}
+                  emptyText={t("t.select.noVoteSelected")}
+                  label={t("t.input.basedOnVotes")}
+               />
             </ReferenceInput>
             <DateInput
                source="givenAt"
@@ -199,13 +212,26 @@ export const FundsOutEdit = () => {
                label={t("t.input.amount")}
             />
             <ReferenceInput source="beneficiariesId" reference="beneficiaries">
-               <SelectInput source="firstName" emptyText={t("t.select.noBeneficiar")} label={t("t.input.beneficiar")} />
+               <SelectInput
+                  validate={required()}
+                  source="firstName"
+                  emptyText={t("t.select.noBeneficiar")}
+                  label={t("t.input.beneficiar")}
+               />
             </ReferenceInput>
             <ReferenceInput source="pollsId" reference="polls">
-               <SelectInput emptyText={t("t.select.noPollSelected")} label={t("t.input.pollReftitle")} />
+               <SelectInput
+                  validate={required()}
+                  emptyText={t("t.select.noPollSelected")}
+                  label={t("t.input.pollReftitle")}
+               />
             </ReferenceInput>
             <ReferenceInput source="votesId" reference="votes" label={t("t.input.votes")}>
-               <SelectInput emptyText={t("t.select.noVoteSelected")} label={t("t.input.basedOnVotes")} />
+               <SelectInput
+                  validate={required()}
+                  emptyText={t("t.select.noVoteSelected")}
+                  label={t("t.input.basedOnVotes")}
+               />
             </ReferenceInput>
             <DateInput
                source="givenAt"

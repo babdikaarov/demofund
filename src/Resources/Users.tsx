@@ -43,7 +43,7 @@ export const UsersList = () => {
                   alignItems={"flex-end"}
                   justifyContent={"space-between"}
                >
-                  <FilterLiveSearch source="firstName" label={t("t.filter.search")} />
+                  <FilterLiveSearch source="firstName" label={t("t.filter.searchByName")} />
                   <ExportButton disabled={userData!.role === "guest"} />
                </Stack>
             </TopToolbar>

@@ -131,16 +131,13 @@ export const createSingleDataDB = async (path: string, segment: string, data?: a
       ...metadata,
    };
    try {
-      const res = await setDoc(
+      await setDoc(
          doc(db, rootPath(path), segment),
          {
             ...mergeData,
          },
          { merge: true },
       );
-      console.log(res);
-
-      console.log(mergeData);
       return {
          error: false,
          data: mergeData,

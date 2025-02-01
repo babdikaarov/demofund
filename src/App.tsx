@@ -22,7 +22,6 @@ import ReceiptOutlinedIcon from "@mui/icons-material/ReceiptOutlined";
 import RequestQuoteOutlinedIcon from "@mui/icons-material/RequestQuoteOutlined";
 import ThumbsUpDownOutlinedIcon from "@mui/icons-material/ThumbsUpDownOutlined";
 import VolunteerActivismOutlinedIcon from "@mui/icons-material/VolunteerActivismOutlined";
-import CampaignOutlinedIcon from "@mui/icons-material/CampaignOutlined";
 import PeopleAltOutlinedIcon from "@mui/icons-material/PeopleAltOutlined";
 import Navigation from "./Components/Navigation";
 import polyglotI18nProvider from "ra-i18n-polyglot";
@@ -38,7 +37,6 @@ const i18nProvider = polyglotI18nProvider(tCallBack, "ru", [
 ]);
 
 const App = () => {
-   const t = useTranslate();
    return (
       <Admin
          requireAuth
@@ -68,7 +66,7 @@ const App = () => {
          </CustomRoutes>
          <Resource
             name="fundsIn"
-            options={{ label: t("t.menu.fundsIn") }}
+            options={{ label: "t.menu.fundsIn" }}
             list={<FundsInList />}
             create={<FundsInCreate />}
             show={<FundsInShow />}
@@ -78,7 +76,7 @@ const App = () => {
          />
          <Resource
             name="users"
-            options={{ label: t("t.menu.users") }}
+            options={{ label: "t.menu.users" }}
             list={<UsersList />}
             show={<UsersShow />}
             edit={<UsersEdit />}
@@ -87,26 +85,26 @@ const App = () => {
          />
 
          <Resource
+            name="polls"
+            options={{ label: "t.menu.polls" }}
+            list={<PollsList />}
+            show={<PollsShow />}
+            create={<PollsCreate />}
+            edit={<PollsEdit />}
+            // icon={CampaignOutlinedIcon}
+         />
+         <Resource
             name="votes"
-            options={{ label: t("t.menu.votes") }}
+            options={{ label: "t.menu.votes" }}
             list={<VotesList />}
             show={<VotesShow />}
             create={<VotesCreate />}
             icon={ThumbsUpDownOutlinedIcon}
          />
-         <Resource
-            name="polls"
-            options={{ label: t("t.menu.polls") }}
-            list={<PollsList />}
-            show={<PollsShow />}
-            create={<PollsCreate />}
-            edit={<PollsEdit />}
-            icon={CampaignOutlinedIcon}
-         />
 
          <Resource
             name="beneficiaries"
-            options={{ label: t("t.menu.beneficiaries") }}
+            options={{ label: "t.menu.beneficiaries" }}
             list={<BeneficiariesList />}
             create={<BeneficiariesCreate />}
             edit={<BeneficiariesEdit />}
@@ -116,13 +114,13 @@ const App = () => {
          />
          <Resource
             name="fundsOut"
-            options={{ label: t("t.menu.fundsOut") }}
+            options={{ label: "t.menu.fundsOut" }}
             list={<FundsOutList />}
             create={<FundsOutCreate />}
             show={<FundsOutShow />}
             edit={<FundsOutEdit />}
             icon={RequestQuoteOutlinedIcon}
-            // recordRepresentation={record}
+            recordRepresentation={(record) => `${record.amount}`}
          />
       </Admin>
    );

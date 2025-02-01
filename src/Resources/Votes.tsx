@@ -24,6 +24,10 @@ import {
    SingleFieldList,
    TextInput,
    useTranslate,
+   required,
+   TopToolbar,
+   FilterLiveSearch,
+   ExportButton,
 } from "react-admin";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -31,8 +35,25 @@ import { Stack } from "@mui/material";
 
 export const VotesList = () => {
    const t = useTranslate();
+   const { data: userData, isPending } = useGetIdentity();
+   if (isPending) return null;
    return (
-      <List>
+      <List
+         actions={
+            <TopToolbar>
+               <Stack
+                  width={"100%"}
+                  spacing={2}
+                  direction={"row"}
+                  alignItems={"flex-end"}
+                  justifyContent={"space-between"}
+               >
+                  <FilterLiveSearch source="title" label={t("t.filter.searchByTitle")} />
+                  <ExportButton disabled={userData!.role === "guest"} />
+               </Stack>
+            </TopToolbar>
+         }
+      >
          <Datagrid bulkActionButtons={false}>
             <ReferenceField source={`pollsId`} reference="polls" label={t("t.input.budgetPlan")}>
                <TextField source="title" />
@@ -188,7 +209,7 @@ export const VotesCreate = () => {
       >
          <SimpleForm>
             <ReferenceInput source="pollsId" reference="polls" label={t("t.input.pollReftitle")}>
-               <SelectInput emptyText={t("t.select.poll")} />
+               <SelectInput validate={required()} emptyText={t("t.select.poll")} />
             </ReferenceInput>
             <TextInput source="title" />
          </SimpleForm>
