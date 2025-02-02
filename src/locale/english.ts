@@ -120,10 +120,22 @@ const englishMessages: TranslationMessages = {
          nav: "Navigation",
          fundsIn: "Donations",
          users: "Donors",
-         polls: "%{order}: Budget Plan",
-         votes: "%{order}: Votes",
-         beneficiaries: "%{order}: Beneficiaries",
-         fundsOut: "%{order}: Payments",
+         polls: "Budget Plan",
+         votes: "Votes",
+         fundsOut: "Payments",
+         jan: "Jan",
+         feb: "Feb",
+         mar: "Mar",
+         apr: "Apr",
+         may: "May",
+         jun: "June",
+         jul: "Jul",
+         aug: "Aug",
+         sep: "Sept",
+         oct: "Oct",
+         nov: "Nov",
+         dec: "Dec",
+         welcome: 'Welcome'
       },
       statistics: {
          title_1: "Total",
@@ -138,6 +150,12 @@ const englishMessages: TranslationMessages = {
             tSumPayments: "Total Payment Amount",
          },
       },
+      chart: {
+         pv: 'Total Donations',
+         uv: 'Current Fund',
+         wv: 'Total Payments', // Add your custom translation for wv
+       }
+       
    },
    ra: {
       action: {

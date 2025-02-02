@@ -29,7 +29,7 @@ export const FundsInEdit = () => {
    const { record, isPending: editControlerPending } = useEditController();
    useEffect(() => {
       if (record && record.isVerified) {
-         notify("record is verified no longer able to edit", {
+         notify(t("t.notifications.recordVerified"), {
             type: "info",
             autoHideDuration: null,
          });
