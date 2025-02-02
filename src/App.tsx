@@ -40,6 +40,7 @@ const i18nProvider = polyglotI18nProvider(tCallBack, "ru", [
 
 const App = () => {
    const t = useTranslate();
+   
    return (
       <Admin
          requireAuth

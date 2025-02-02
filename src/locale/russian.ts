@@ -124,20 +124,44 @@ const RussianTranslation: TranslationMessages = {
          polls: "План бюджета",
          votes: "Голосование",
          fundsOut: "Расход бюджета",
+         jan: "Янв",
+         feb: "Фев",
+         mar: "Мар",
+         apr: "Апр",
+         may: "Май",
+         jun: "Июн",
+         jul: "Июл",
+         aug: "Авг",
+         sep: "Сен",
+         oct: "Окт",
+         nov: "Ноя",
+         dec: "Дек",
+         welcome: 'Добро пожаловать'
       },
-      statistics: {
+      admin: {
+         welcome: 'Добро пожаловать',
+       },
+       statistics: {
          title_1: "Общее",
          title_2: "Пожертвования",
          title_3: "Использование фонда",
          fields: {
-            cFund: "Текущий фонд",
-            tDonors: "Всего доноров",
-            tDonations: "Всего пожертвований",
-            tSumDonations: "Общая сумма пожертвований",
-            tPayments: "Всего платежей",
-            tSumPayments: "Общая сумма платежей",
+           cFund: "Текущий фонд",
+           tDonors: "Всего доноров",
+           tDonations: "Всего пожертвований",
+           tSumDonations: "Общая сумма пожертвований",
+           tPayments: "Всего платежей",
+           tSumPayments: "Общая сумма платежей",
          },
-      },
+       },
+       notifications: {
+         recordVerified: "Запись проверена, редактирование невозможно",
+       },
+       chart: {
+         pv: 'Всего пожертвований',
+         uv: 'Текущий фонд',
+         wv: 'Всего платежей', // Add your custom translation for wv
+       }
    },
    ra: {
       action: {

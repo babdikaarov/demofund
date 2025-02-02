@@ -1,123 +1,118 @@
 import * as React from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import { Title, Resource, useGetList, useGetOne } from "react-admin";
+import { Title, useGetList, useGetOne, useTranslate } from "react-admin";
 import CardWithIcon from "./CardWithIcon";
-import DollarIcon from '@mui/icons-material/AttachMoney'
+import DollarIcon from '@mui/icons-material/AttachMoney';
 import CommentIcon from "@mui/icons-material/PersonAdd";
 import "./styles/Dashboard.css";
-import { FundsInList } from "../Resources/FundsIn/ListShow";
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
+import { XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LineChart, Line} from "recharts";
 import { useMediaQuery } from "@mui/material";
 
 export const Dashboard = () => {
-  const [totalFunds, setTotalFunds] = React.useState<number>(0);
+  const { data: statsData } = useGetOne("stats", { id: 1 });
+  const { data: fundsData = []} = useGetList("fundsIn");
+  const isSmallScreen = useMediaQuery('(max-width:650px)');
   const [totalPayments, setTotalPayments] = React.useState<number>(0);
-
+  const t = useTranslate(); // Use translate function
   const [chartData, setChartData] = React.useState([
-    { name: "Jan", totalPayments: 0 },
-    { name: "Feb", totalPayments: 0 },
-    { name: "Mar", totalPayments: 0 },
-    { name: "Apr", totalPayments: 0 },
-    { name: "May", totalPayments: 0 },
-    { name: "Jun", totalPayments: 0 },
-    { name: "Jul", totalPayments: 0 },
-    { name: "Aug", totalPayments: 0 },
-    { name: "Sep", totalPayments: 0 },
-    { name: "Oct", totalPayments: 0 },
-    { name: "Nov", totalPayments: 0 },
-    { name: "Dec", totalPayments: 0 },
+    { name: "Jan", pv: 0 },
+    { name: "Feb", pv: 0 },
+    { name: "Mar", pv: 0 },
+    { name: "Apr", pv: 0 },
+    { name: "May", pv: 0 },
+    { name: "Jun", pv: 0 },
+    { name: "Jul", pv: 0 },
+    { name: "Aug", pv: 0 },
+    { name: "Sep", pv: 0 },
+    { name: "Oct", pv: 0 },
+    { name: "Nov", pv: 0 },
+    { name: "Dec", pv: 0 }
   ]);
 
-  const { data: statsData} = useGetOne("stats", {id: 1});
-  const { data: fundsData = [], total: fundsTotal, isPending: fundsPending, error: fundsError } = useGetList("fundsIn");
-
-  const isSmallScreen = useMediaQuery('(max-width:650px)');
-  const isMediumScreen = useMediaQuery('(max-width:900px)');
-
   const getMonth = (el: any) => {
+    if (!el.depositedAt) return 0; // fallback for invalid date
     const date = new Date(el.depositedAt);
     return date.getUTCMonth(); // 0 = Jan, 1 = Feb, ..., 11 = Dec
   };
 
   React.useEffect(() => {
-    let total;
-
     if (fundsData.length > 0) {
       const newChartData = [
-        { name: "Jan", totalPayments: 0 },
-        { name: "Feb", totalPayments: 0 },
-        { name: "Mar", totalPayments: 0 },
-        { name: "Apr", totalPayments: 0 },
-        { name: "May", totalPayments: 0 },
-        { name: "Jun", totalPayments: 0 },
-        { name: "Jul", totalPayments: 0 },
-        { name: "Aug", totalPayments: 0 },
-        { name: "Sep", totalPayments: 0 },
-        { name: "Oct", totalPayments: 0 },
-        { name: "Nov", totalPayments: 0 },
-        { name: "Dec", totalPayments: 0 },
+        { name: t("t.menu.jan", { defaultValue: "Jan" }), pv: 0, uv: 0, wv: 0},
+        { name: t("t.menu.feb", { defaultValue: "Feb" }), pv: 0, uv: 0, wv: 0},
+        { name: t("t.menu.mar", { defaultValue: "Mar" }), pv: 0, uv: 0, wv: 0 },
+        { name: t("t.menu.apr", { defaultValue: "Apr" }), pv: 0, uv: 0, wv: 0 },
+        { name: t("t.menu.may", { defaultValue: "May" }), pv: 0, uv: 0, wv: 0 },
+        { name: t("t.menu.jun", { defaultValue: "Jun" }), pv: 0, uv: 0, wv: 0 },
+        { name: t("t.menu.jul", { defaultValue: "Jul" }), pv: 0, uv: 0, wv: 0 },
+        { name: t("t.menu.aug", { defaultValue: "Aug" }), pv: 0, uv: 0, wv: 0 },
+        { name: t("t.menu.sep", { defaultValue: "Sep" }), pv: 0, uv: 0, wv: 0 },
+        { name: t("t.menu.oct", { defaultValue: "Oct" }), pv: 0, uv: 0, wv: 0 },
+        { name: t("t.menu.nov", { defaultValue: "Nov" }), pv: 0, uv: 0, wv: 0 },
+        { name: t("t.menu.dec", { defaultValue: "Dec" }), pv: 0, uv: 0, wv: 0 },
       ];
-
+  
+      let totalPayments = 0;
+      let uvAddedForMonth = new Array(12).fill(false); // Track whether uv has been added for a month
+  
       fundsData.forEach((el) => {
-        const monthIndex = getMonth(el); // Find the month index
-        newChartData[monthIndex].totalPayments += el.amount; // Accumulate the amount
-
-        if (fundsData.length > 0) {
-          let totalPayments = 0;
-
-          fundsData.forEach((el) => {
-            totalPayments += el.amount;
-          });
-          setTotalPayments(totalPayments);
+        const monthIndex = getMonth(el);
+        newChartData[monthIndex].pv += el.amount;
+        totalPayments += el.amount;
+  
+        // Only add the uv value once for each month
+        if (!uvAddedForMonth[monthIndex]) {
+          newChartData[monthIndex].uv += statsData.currentFund;
+          newChartData[monthIndex].wv += statsData.totalSumPayments;
+          uvAddedForMonth[monthIndex] = true;
         }
       });
-
-      setChartData(newChartData); // Update the state
+  
+      setTotalPayments(totalPayments);
+      setChartData(newChartData);
     }
-  }, [fundsData]);
+  }, [fundsData, statsData, t]); // Ensure statsData is considered as a dependency
 
   return (
-    <>
-      <Card>
-        <Title title="Welcome to the administration" />
-        <CardContent style={{ display: 'flex', flexDirection: 'column', gap: '50px' }}>
+    <Card>
+      <Title title={t("t.menu.welcome")} />
+      <CardContent style={{ display: 'flex', flexDirection: 'column', gap: '50px' }}>
         <div
           className="cardIcons-div"
           style={{
             display: 'flex',
-            flexDirection: isSmallScreen ? 'column' : 'row', // Stack on small screens
+            flexDirection: isSmallScreen ? 'column' : 'row',
             justifyContent: 'center',
-            gap: '10px',  // 50px gap between card elements
+            gap: '10px',
             flexWrap: 'wrap',
           }}
         >
-          <CardWithIcon key={`Current Fund`} icon={DollarIcon} to="/" title="Current Fund" subtitle={`$ ${statsData?.currentFund || 0}`} />
-          <CardWithIcon key={`Total Donations`} icon={DollarIcon} to="/" title="Total funds" subtitle={`$ ${statsData?.totalSumDonations || 0}`} />
-          <CardWithIcon key={'Total Payments'} icon={DollarIcon} to='/' title="Total spendings" subtitle={`$ ${statsData?.totalSumPayments || 0}`} />
-          <CardWithIcon key={`Total Donors`} icon={CommentIcon} to="/" title="Total Donors" subtitle={statsData?.totalDonors || 0} />
+          <CardWithIcon key={`Current Fund`} icon={DollarIcon} to="/" title={t("t.statistics.fields.cFund")} subtitle={`$ ${statsData?.currentFund || 0}`} />
+          <CardWithIcon key={`Total Donations`} icon={DollarIcon} to="/" title={t("t.statistics.fields.tDonations")} subtitle={`$ ${statsData?.totalSumDonations || 0}`} />
+          <CardWithIcon key={'Total Payments'} icon={DollarIcon} to='/' title={t("t.statistics.fields.tPayments")} subtitle={`$ ${statsData?.totalSumPayments || 0}`} />
+          <CardWithIcon key={`Total Donors`} icon={CommentIcon} to="/" title={t("t.statistics.fields.tDonors")} subtitle={statsData?.totalDonors || 0} />
         </div>
 
         {/* Render Resource only if not on small screen */}
-        {!isSmallScreen && <Resource name="fundsIn" list={FundsInList} />}
+{/*         {!isSmallScreen && <Resource name="fundsIn" list={FundsInList} />} */}
 
-        {/* Ensure there is always 50px gap between cardIcons-div and the chart */}
         <div style={{ marginTop: '50px' }}>
           <ResponsiveContainer width="100%" height={isSmallScreen ? 250 : 300}>
-            <BarChart data={chartData}>
+            <LineChart width={730} height={250} data={chartData} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="name" />
               <YAxis />
               <Tooltip />
               <Legend />
-              <Bar dataKey="totalPayments" fill="#8884d8" />
-            </BarChart>
+              <Line type="monotone" dataKey="pv" stroke="#8884d8" name={t('t.chart.pv')}/>
+              <Line type="monotone" dataKey="uv" stroke="#82ca9d" name={t('t.chart.uv')}/>
+              <Line type="monotone" dataKey="wv" stroke="#ff7300" name={t('t.chart.wv')}/>
+            </LineChart>
           </ResponsiveContainer>
         </div>
       </CardContent>
-
-      </Card>
-    </>
+    </Card>
   );
 };
 
