@@ -154,17 +154,13 @@ export const authProvider = {
          return false;
       }
 
-      // const role = userData.role === "donor" || userData.role === "guest";
-      // const ownCreated = record.createdBy === userData.user.id;
-      // console.log(role, "role");
-      // console.log(ownCreated, "own created");
       if (resource == "users") {
          if (record && (userData.role === "guest" || userData.role === "donor") && ["edit"].includes(action)) {
             return record.createdBy === userData.id;
          }
       }
       if (userData.role === "donor") {
-         if (record && ["edit"].includes(action)) {
+         if (record && ["edit", "create", "delete"].includes(action)) {
             return record.createdBy === userData.id;
          }
       }

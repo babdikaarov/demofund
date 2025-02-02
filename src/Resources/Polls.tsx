@@ -27,15 +27,16 @@ import {
    TopToolbar,
    FilterLiveSearch,
    ExportButton,
+   CreateButton,
 } from "react-admin";
 import { Stack } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 export const PollsList = () => {
    const t = useTranslate();
-    const { data: userData, isPending } = useGetIdentity();
-    if (isPending) return null;
-   
+   const { data: userData, isPending } = useGetIdentity();
+   if (isPending) return null;
+
    return (
       <List
          actions={
@@ -48,6 +49,7 @@ export const PollsList = () => {
                   justifyContent={"space-between"}
                >
                   <FilterLiveSearch source="title" label={t("t.filter.searchByTitle")} />
+                  <CreateButton />
                   <ExportButton disabled={userData!.role === "guest"} />
                </Stack>
             </TopToolbar>
@@ -98,6 +100,7 @@ export const PollsShow = () => {
 export const PollsCreate = () => {
    const navigate = useNavigate();
    const t = useTranslate();
+
    const validateUserCreation: ValidateForm = (values) => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const errors: any = {};
@@ -118,12 +121,12 @@ export const PollsCreate = () => {
    };
 
    return (
-      <Create>
+      <Create redirect="show">
          <SimpleForm
             validate={validateUserCreation}
             toolbar={
                <Stack direction={"row"} justifyContent={"space-between"}>
-                  <Button type="button" label={t("t.input.back")} size="large" onClick={() => navigate(-1)} />
+                  <Button type="button" label={t("t.button.back")} size="large" onClick={() => navigate("/polls")} />
                   <SaveButton />
                </Stack>
             }
@@ -160,6 +163,7 @@ export const PollsCreate = () => {
       </Create>
    );
 };
+
 export const PollsEdit = () => {
    const navigate = useNavigate();
    const t = useTranslate();

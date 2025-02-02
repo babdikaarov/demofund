@@ -28,6 +28,7 @@ import {
    TopToolbar,
    FilterLiveSearch,
    ExportButton,
+   CreateButton,
 } from "react-admin";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -49,6 +50,7 @@ export const VotesList = () => {
                   justifyContent={"space-between"}
                >
                   <FilterLiveSearch source="title" label={t("t.filter.searchByTitle")} />
+                  <CreateButton />
                   <ExportButton disabled={userData!.role === "guest"} />
                </Stack>
             </TopToolbar>
@@ -206,6 +208,7 @@ export const VotesCreate = () => {
             totalVoters: createVoters()?.length,
             totalVoted: 0,
          })}
+         redirect="show"
       >
          <SimpleForm>
             <ReferenceInput source="pollsId" reference="polls" label={t("t.input.pollReftitle")}>

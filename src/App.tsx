@@ -1,5 +1,5 @@
 // in src/admin/index.tsx
-import { Admin, Authenticated, CustomRoutes, Resource, useTranslate } from "react-admin";
+import { Admin, Authenticated, CustomRoutes, Resource } from "react-admin";
 import { Route } from "react-router-dom";
 import { authProvider, dataProvider } from "./providers/providers";
 import { CustomLoginPage } from "./components/LoginPage";
@@ -11,7 +11,6 @@ import { MyLayout } from "./components/Layout";
 import { FundsInList, FundsInShow } from "./Resources/FundsIn/ListShow";
 import { FundsInCreate } from "./Resources/FundsIn/Create";
 import { FundsInEdit } from "./Resources/FundsIn/Edit";
-import { StatisticsShow } from "./components/Statistics";
 import {
    BeneficiariesCreate,
    BeneficiariesEdit,
@@ -23,6 +22,7 @@ import RequestQuoteOutlinedIcon from "@mui/icons-material/RequestQuoteOutlined";
 import ThumbsUpDownOutlinedIcon from "@mui/icons-material/ThumbsUpDownOutlined";
 import VolunteerActivismOutlinedIcon from "@mui/icons-material/VolunteerActivismOutlined";
 import PeopleAltOutlinedIcon from "@mui/icons-material/PeopleAltOutlined";
+import CampaignOutlinedIcon from "@mui/icons-material/CampaignOutlined";
 import Navigation from "./components/Navigation";
 import polyglotI18nProvider from "ra-i18n-polyglot";
 import { translations } from "./locale/index";
@@ -57,14 +57,6 @@ const App = () => {
                   </Authenticated>
                }
             />
-            <Route
-               path="/stats"
-               element={
-                  <Authenticated>
-                     <StatisticsShow />
-                  </Authenticated>
-               }
-            />
          </CustomRoutes>
          <Resource
             name="fundsIn"
@@ -93,7 +85,7 @@ const App = () => {
             show={<PollsShow />}
             create={<PollsCreate />}
             edit={<PollsEdit />}
-            // icon={CampaignOutlinedIcon}
+            icon={CampaignOutlinedIcon}
          />
          <Resource
             name="votes"

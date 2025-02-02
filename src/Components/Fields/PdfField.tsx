@@ -7,11 +7,11 @@ const PDFField: React.FC<FieldProps> = ({ source, record, ...rest }) => {
       <Box>
          <object
             data={url}
-            className={ImageFieldClasses.image}
+            className={ImageFieldClasses.list}
             type="application/pdf"
             width="100%"
             height="100%"
-            style={{ height: "100vh" }}
+            style={{ height: "50vh" }}
             {...rest}
          >
             <p>
@@ -19,7 +19,6 @@ const PDFField: React.FC<FieldProps> = ({ source, record, ...rest }) => {
                <a href={url} target="_blank" rel="noopener noreferrer">
                   Download the PDF
                </a>
-               .
             </p>
          </object>
       </Box>

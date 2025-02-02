@@ -21,12 +21,15 @@ import {
    Show,
    useTranslate,
    SimpleShowLayout,
+   FunctionField,
+   Button,
 } from "react-admin";
-import PDFField from "../Components/Fields/PdfField";
+import { useNavigate } from "react-router-dom";
+import PDFField from "../components/Fields/PdfField";
 import { useState } from "react";
-import { PdfImageField } from "../Components/Fields/PdfImageField";
-import MyFileField from "../Components/Fields/MyFileField";
-
+import { PdfImageField } from "../components/Fields/PdfImageField";
+import MyFileField from "../components/Fields/MyFileField";
+import { Stack } from "@mui/material";
 export const FundsOutList = () => {
    const t = useTranslate();
    return (
@@ -51,6 +54,7 @@ export const FundsOutList = () => {
 };
 export const FundsOutShow = () => {
    const t = useTranslate();
+   const navigate = useNavigate();
    return (
       <Show>
          <SimpleShowLayout>
@@ -67,6 +71,18 @@ export const FundsOutShow = () => {
             </ReferenceField>
 
             <PdfImageField source="reciept.src" title="reciept.title" label={t("t.input.reciept")} />
+            <FunctionField
+               render={() => (
+                  <Stack direction={"row"} justifyContent={"space-between"}>
+                     <Button
+                        type="button"
+                        label={t("t.button.back")}
+                        size="large"
+                        onClick={() => navigate("/fundsIn")}
+                     />
+                  </Stack>
+               )}
+            />
          </SimpleShowLayout>
       </Show>
    );

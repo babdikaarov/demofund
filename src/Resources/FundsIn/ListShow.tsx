@@ -1,4 +1,3 @@
-// in src/posts.jsx
 import { useNavigate } from "react-router-dom";
 import {
    List,
@@ -22,8 +21,8 @@ import {
    BooleanField,
 } from "react-admin";
 import { Stack, useMediaQuery } from "@mui/material";
-import { PdfImageField } from "../../Components/Fields/PdfImageField";
-import MyFileField from "../../Components/Fields/MyFileField";
+import { PdfImageField } from "../../components/Fields/PdfImageField";
+import MyFileField from "../../components/Fields/MyFileField";
 
 export const FundsInList = () => {
    const { data: identity } = useGetIdentity();

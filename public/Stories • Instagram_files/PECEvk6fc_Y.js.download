@@ -1,4 +1,0 @@
-;/*FB_PKG_DELIM*/
-
-__d("MAWFetchXMABlob",["FBLogger","Promise"],(function(a,b,c,d,e,f,g){"use strict";var h;function a(a){var d=a.descriptionForLogging,e=a.url,f=a.xmaContentType;return e==null||e===""?(h||(h=b("Promise"))).resolve():window.fetch(e).then(function(a){return a.blob()})["catch"](function(a){c("FBLogger")("messenger_web_sharing").mustfix("Error fetching url in xma share from %s, with XMA content type %s and error %s",d,f,a);return(h||(h=b("Promise"))).resolve()})}g.fetchBlob=a}),98);
-__d("MWHasLinksUtil",["URLMatcher","isStringNullOrEmpty"],(function(a,b,c,d,e,f,g){"use strict";function a(a){return c("isStringNullOrEmpty")(a)?!1:c("URLMatcher").match(a)!=null}g.getHasLinks=a}),98);

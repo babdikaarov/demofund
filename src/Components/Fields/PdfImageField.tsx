@@ -1,7 +1,7 @@
 import { ImageField, useFieldValue, type FieldProps, type ImageFieldProps } from "react-admin";
-import PDFField from "./PdfField";
 import { checkIsPdf } from "../../Utils/utils";
 import { useEffect, useState } from "react";
+import PDFField from "./PdfField";
 
 export const PdfImageField = (props: FieldProps | ImageFieldProps) => {
    const url = useFieldValue(props);
@@ -24,6 +24,6 @@ export const PdfImageField = (props: FieldProps | ImageFieldProps) => {
    return isPDF ? (
       <PDFField {...props} />
    ) : (
-      <ImageField {...props} sx={{ "& img": { width: "100% !important", height: "100% !important" } }} />
+      <ImageField {...props} sx={{ "& img": { width: "50% !important", height: "50% !important" } }} />
    );
 };

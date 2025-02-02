@@ -6,7 +6,6 @@ import {
    SimpleForm,
    TextField,
    NumberField,
-   ReferenceArrayField,
    TextInput,
    useTranslate,
    ChipField,
@@ -21,10 +20,13 @@ import {
    ExportButton,
    NumberInput,
    useGetList,
-   Link,
+   CreateButton,
+   ReferenceManyField,
+   SingleFieldList,
+   Count,
 } from "react-admin";
 import { useNavigate } from "react-router-dom";
-import { Chip, Stack } from "@mui/material";
+import { Stack } from "@mui/material";
 export const BeneficiariesList: React.FC = () => {
    const t = useTranslate();
    const { data: userData, isPending } = useGetIdentity();
@@ -42,6 +44,7 @@ export const BeneficiariesList: React.FC = () => {
                   justifyContent={"space-between"}
                >
                   <FilterLiveSearch source="firstName" label={t("t.filter.searchByName")} />
+                  <CreateButton disabled={userData!.role === "guest"} />
                   <ExportButton disabled={userData!.role === "guest"} />
                </Stack>
             </TopToolbar>
@@ -61,32 +64,22 @@ export const BeneficiariesShow: React.FC = () => {
    const navigate = useNavigate();
    const { data, isPending } = useGetList("fundsOut");
    if (isPending) return null;
-   console.log(data);
+   const totalBenefit = data?.reduce((sum, item) => sum + item.amount, 0);
    return (
       <Show>
          <SimpleShowLayout>
             <TextField source="firstName" label={t("t.input.fName")} />
             <TextField source="lastName" label={t("t.input.lName")} />
-            <NumberField source="totalBenefit" label={t("t.input.totalBenefit")} />
-            <NumberField source="totalGrants" label={t("t.input.totalGrants")} />
-            <ReferenceArrayField source="givenAt" reference="fundsOut" label={t("t.input.refToDonation")}>
-               <ChipField label={t("t.input.refToDonation")} source="givenAt" />
-            </ReferenceArrayField>
-            <FunctionField
-               render={(record) =>
-                  data!.map((el, key) => {
-                     if (record.id == el.beneficiariesId) {
-                        return (
-                           <Link to={`/fundsOut/${el.id}/show`} target="_blank">
-                              <Chip key={key} label={el.givenAt} onClick={() => console.log("")} />
-                           </Link>
-                        );
-                     } else {
-                        return null;
-                     }
-                  })
-               }
-            />
+            <NumberField source="totalBenefit" record={{ totalBenefit }} label={t("t.input.totalBenefit")} />
+            <ReferenceManyField target="beneficiariesId" reference="fundsOut" label={t("t.input.totalGrants")}>
+               <Count />
+            </ReferenceManyField>
+            <ReferenceManyField target="beneficiariesId" reference="fundsOut" label={t("t.input.refToDonation")}>
+               <SingleFieldList linkType={"show"}>
+                  <ChipField source="givenAt" />
+               </SingleFieldList>
+            </ReferenceManyField>
+
             <FunctionField
                render={() => (
                   <Stack direction={"row"} justifyContent={"space-between"}>
@@ -125,7 +118,7 @@ export const BeneficiariesCreate: React.FC = () => {
       <Create redirect="list">
          <SimpleForm>
             <TextInput source="firstName" label={t("t.input.fName")} />
-            <TextInput source="lastName" label={t("t.input.tName")} />
+            <TextInput source="lastName" label={t("t.input.lName")} />
             <TextInput inputMode="tel" source="phone" label={t("t.input.phone")} />
             {/* <NumberInput inputMode="numeric" source="totalBenefit" label={t("t.input.totalBenefit")} />
             <NumberInput inputMode="numeric" source="totalGrants" label={t("t.input.totalGrants")} /> */}
