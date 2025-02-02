@@ -25,10 +25,10 @@ import {
    Button,
 } from "react-admin";
 import { useNavigate } from "react-router-dom";
-import PDFField from "../components/Fields/PdfField";
+import PDFField from "../ui/Fields/PdfField";
 import { useState } from "react";
-import { PdfImageField } from "../components/Fields/PdfImageField";
-import MyFileField from "../components/Fields/MyFileField";
+import { PdfImageField } from "../ui/Fields/PdfImageField";
+import MyFileField from "../ui/Fields/MyFileField";
 import { Stack } from "@mui/material";
 export const FundsOutList = () => {
    const t = useTranslate();

@@ -19,7 +19,7 @@ import {
    useTranslate,
    TextInput,
 } from "react-admin";
-import PDFField from "../../Components/Fields/PdfField";
+import PDFField from "../../ui/Fields/PdfField";
 import { Box, Stack } from "@mui/material";
 export const FundsInEdit = () => {
    const notify = useNotify();

@@ -18,7 +18,7 @@ import {
    useTranslate,
 } from "react-admin";
 import { Stack } from "@mui/material";
-import PDFField from "../../Components/Fields/PdfField";
+import PDFField from "../../ui/Fields/PdfField";
 export const FundsInCreate = () => {
    const notify = useNotify();
    const t = useTranslate();

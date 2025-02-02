@@ -21,8 +21,8 @@ import {
    BooleanField,
 } from "react-admin";
 import { Stack, useMediaQuery } from "@mui/material";
-import { PdfImageField } from "../../components/Fields/PdfImageField";
-import MyFileField from "../../components/Fields/MyFileField";
+import { PdfImageField } from "../../ui/Fields/PdfImageField";
+import MyFileField from "../../ui/Fields/MyFileField";
 
 export const FundsInList = () => {
    const { data: identity } = useGetIdentity();

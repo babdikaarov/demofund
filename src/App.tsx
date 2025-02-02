@@ -2,12 +2,12 @@
 import { Admin, Authenticated, CustomRoutes, Resource } from "react-admin";
 import { Route } from "react-router-dom";
 import { authProvider, dataProvider } from "./providers/providers";
-import { CustomLoginPage } from "./components/LoginPage";
+import { CustomLoginPage } from "./ui/LoginPage";
 import { UsersEdit, UsersList, UsersShow } from "./Resources/Users";
 import { PollsCreate, PollsEdit, PollsList, PollsShow } from "./Resources/Polls";
 import { VotesCreate, VotesList, VotesShow } from "./Resources/Votes";
 import { FundsOutCreate, FundsOutEdit, FundsOutList, FundsOutShow } from "./Resources/OutList";
-import { MyLayout } from "./components/Layout";
+import { MyLayout } from "./ui/Layout";
 import { FundsInList, FundsInShow } from "./Resources/FundsIn/ListShow";
 import { FundsInCreate } from "./Resources/FundsIn/Create";
 import { FundsInEdit } from "./Resources/FundsIn/Edit";
@@ -23,10 +23,10 @@ import ThumbsUpDownOutlinedIcon from "@mui/icons-material/ThumbsUpDownOutlined";
 import VolunteerActivismOutlinedIcon from "@mui/icons-material/VolunteerActivismOutlined";
 import PeopleAltOutlinedIcon from "@mui/icons-material/PeopleAltOutlined";
 import CampaignOutlinedIcon from "@mui/icons-material/CampaignOutlined";
-import Navigation from "./components/Navigation";
+import Navigation from "./ui/Navigation";
 import polyglotI18nProvider from "ra-i18n-polyglot";
 import { translations } from "./locale/index";
-import Dashboard from "./components/Dashboard";
+import Dashboard from "./ui/Dashboard";
 const tCallBack = (l: string) => {
    return translations[l as keyof typeof translations];
 };
