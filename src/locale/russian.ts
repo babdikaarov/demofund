@@ -69,6 +69,7 @@ const RussianTranslation: TranslationMessages = {
          admin: "Администратор",
          donor: "Донор",
          guest: "Гость",
+         dev: "Разработчик",
       },
       status: {
          discussion: "Обсуждение",
@@ -206,7 +207,7 @@ const RussianTranslation: TranslationMessages = {
          toggle_theme: "Переключить тему",
          select_columns: "Столбцы",
          update_application: "Обновить приложение",
-         select_all_button: ""
+         select_all_button: "",
       },
       boolean: {
          true: "Да",
@@ -250,9 +251,11 @@ const RussianTranslation: TranslationMessages = {
          about: "Справка",
          are_you_sure: "Вы уверены?",
          auth_error: "Произошла ошибка при валидации токена аутентификации",
-         bulk_delete_content: "Вы уверены, что хотите удалить %{name}? |||| Вы уверены, что хотите удалить %{smart_count} объектов? |||| Вы уверены, что хотите удалить %{smart_count} объектов?",
+         bulk_delete_content:
+            "Вы уверены, что хотите удалить %{name}? |||| Вы уверены, что хотите удалить %{smart_count} объектов? |||| Вы уверены, что хотите удалить %{smart_count} объектов?",
          bulk_delete_title: "Удалить %{name} |||| Удалить %{smart_count} %{name} |||| Удалить %{smart_count} %{name}",
-         bulk_update_content: "Вы уверены, что хотите обновить %{name}? |||| Вы уверены, что хотите обновить %{smart_count} объектов?",
+         bulk_update_content:
+            "Вы уверены, что хотите обновить %{name}? |||| Вы уверены, что хотите обновить %{smart_count} объектов?",
          bulk_update_title: "Обновить %{name} |||| Обновить %{smart_count} %{name}",
          clear_array_input: "Вы уверены, что хотите очистить весь список?",
          delete_content: "Вы уверены что хотите удалить этот объект",
@@ -267,7 +270,7 @@ const RussianTranslation: TranslationMessages = {
          unsaved_changes: "Некоторые из ваших изменений не были сохранены. Вы уверены, что хотите их игнорировать?",
          access_denied: "У вас нет права доступа к этой странице",
          authentication_error: "Ошибка сервера при проверке аутентификации",
-         select_all_limit_reached: ""
+         select_all_limit_reached: "",
       },
       navigation: {
          no_results: "Результатов не найдено",

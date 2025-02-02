@@ -69,6 +69,7 @@ const englishMessages: TranslationMessages = {
          admin: "Administrator",
          donor: "Donor",
          guest: "Guest",
+         dev: "Developer",
       },
       status: {
          discussion: "Discussion",

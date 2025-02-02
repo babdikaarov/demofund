@@ -19,6 +19,7 @@ import {
    SimpleList,
    useTranslate,
    BooleanField,
+   DeleteButton,
 } from "react-admin";
 import { Stack, useMediaQuery } from "@mui/material";
 import { PdfImageField } from "../../ui/Fields/PdfImageField";
@@ -102,6 +103,7 @@ export const FundsInShow = () => {
                         size="large"
                         onClick={() => navigate("/fundsIn")}
                      />
+                     <DeleteButton />
                   </Stack>
                )}
             ></FunctionField>

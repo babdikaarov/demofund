@@ -3,7 +3,7 @@
 import { Login } from "react-admin";
 import * as React from "react";
 import { styled } from "@mui/material/styles";
-import { Button, CardContent, CircularProgress, Divider, Stack } from "@mui/material";
+import { Avatar, Button, CardContent, CircularProgress, Divider, Stack } from "@mui/material";
 import { Form, required, useTranslate, useLogin, useNotify } from "ra-core";
 import { TextInput } from "react-admin";
 import googleIcon from "../assets/google-icon.svg";
@@ -12,7 +12,6 @@ import ResetDialog from "./ResetDialog";
 import RegisterDialog from "./RegisterDialog";
 import { serverTimestamp } from "firebase/firestore";
 import { FormProvider } from "../Utils/contextAPI";
-
 const MyLoginForm = (props: LoginFormProps) => {
    const { redirectTo, className } = props;
    const [loading, setLoading] = React.useState(false);
@@ -205,7 +204,14 @@ interface FormData {
 
 export const CustomLoginPage = (props: JSX.IntrinsicAttributes) => {
    return (
-      <Login {...props}>
+      <Login
+         {...props}
+         avatarIcon={
+            <Avatar sizes="large">
+               <img src="./icon.png" width={"100%"} alt="Avatar" />
+            </Avatar>
+         }
+      >
          <MyLoginForm {...props} />
       </Login>
    );

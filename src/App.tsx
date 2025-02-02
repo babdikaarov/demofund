@@ -45,7 +45,7 @@ const App = () => {
          dataProvider={dataProvider}
          authProvider={authProvider}
          loginPage={CustomLoginPage}
-         dashboard={Dashboard}
+         dashboard={() => <Dashboard />}
       >
          <CustomRoutes>
             <Route

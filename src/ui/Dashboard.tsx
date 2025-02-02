@@ -1,6 +1,6 @@
 import * as React from "react";
 import Card from "@mui/material/Card";
-import { Title, useGetList, useGetOne, useTranslate } from "react-admin";
+import { Title, useGetIdentity, useGetList, useGetOne, useTranslate } from "react-admin";
 import CardWithIcon from "./CardWithIcon";
 import "./styles/Dashboard.css";
 import { XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LineChart, Line } from "recharts";
@@ -69,11 +69,12 @@ export const Dashboard = () => {
                uvAddedForMonth[monthIndex] = true;
             }
          });
-
          setChartData(newChartData);
       }
    }, [fundsData, statsData, t]); // Ensure statsData is considered as a dependency
-
+   const { data: userIdentity, isPending } = useGetIdentity();
+   if (isPending) return null;
+   if (userIdentity!.role == "guest") return null;
    return (
       <Card
          sx={{
@@ -113,7 +114,7 @@ export const Dashboard = () => {
                   <CardWithIcon
                      icon={PeopleAltOutlinedIcon}
                      title={t("t.statistics.fields.tDonors")}
-                     subtitle={statsData?.totalDonors || 0}
+                     subtitle={`${statsData?.totalDonors || 0}`}
                   />
                </Grid>
                <Grid>
@@ -127,7 +128,7 @@ export const Dashboard = () => {
                   <CardWithIcon
                      icon={RequestQuoteIcon}
                      title={t("t.statistics.fields.tPayments")}
-                     subtitle={statsData?.totalPayments || 0}
+                     subtitle={`${statsData?.totalPayments || 0}`}
                   />
                </Grid>
                <Grid>

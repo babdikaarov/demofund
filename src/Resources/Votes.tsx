@@ -29,6 +29,7 @@ import {
    FilterLiveSearch,
    ExportButton,
    CreateButton,
+   DeleteButton,
 } from "react-admin";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -184,6 +185,7 @@ const VotesEditLayout = () => {
                      onConfirm={handleConfirm}
                      onClose={handleDialogClose}
                   />
+                  {identity.role !== "admin" ? null : <DeleteButton />}
                </Stack>
             )}
          />

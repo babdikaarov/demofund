@@ -133,6 +133,16 @@ export const authProvider = {
             stats: ["list", "show"],
             navigation: ["create", "edit", "delete", "list", "show"],
          },
+         dev: {
+            fundsIn: ["list", "show"],
+            fundsOut: ["list", "show"],
+            beneficiaries: ["list", "show"],
+            votes: ["list", "show"],
+            polls: ["list", "show"],
+            users: ["list", "show"],
+            stats: ["list", "show"],
+            navigation: ["list", "show"],
+         },
          donor: {
             navigation: ["show"],
             stats: ["list", "show"],
@@ -155,8 +165,12 @@ export const authProvider = {
       }
 
       if (resource == "users") {
-         if (record && (userData.role === "guest" || userData.role === "donor") && ["edit"].includes(action)) {
-            return record.createdBy === userData.id;
+         if (record && ["edit"].includes(action)) {
+            if (userData.role === "guest" || userData.role === "donor") {
+               return record.createdBy === userData.id;
+            } else if (userData.role === "admin") {
+               return true;
+            }
          }
       }
       if (userData.role === "donor") {

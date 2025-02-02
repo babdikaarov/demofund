@@ -69,6 +69,7 @@ const KyrgyzTranslation: TranslationMessages = {
          admin: "Администратор",
          donor: "Донор",
          guest: "Конок",
+         dev: "Разработчик",
       },
       status: {
          discussion: "Талкуу",
@@ -206,7 +207,7 @@ const KyrgyzTranslation: TranslationMessages = {
          toggle_theme: "Теманы алмаштыруу",
          select_columns: "Мамычалар",
          update_application: "Колдонмону жаңыртыңыз",
-         select_all_button: ""
+         select_all_button: "",
       },
       boolean: {
          true: "Ооба",
@@ -225,7 +226,7 @@ const KyrgyzTranslation: TranslationMessages = {
          empty: "Жок %{name}.",
          invite: "Дагы бирөөнү кошкуңуз келеби?",
          access_denied: "",
-         authentication_error: ""
+         authentication_error: "",
       },
       input: {
          file: {
@@ -250,9 +251,12 @@ const KyrgyzTranslation: TranslationMessages = {
          about: "Шилтеме",
          are_you_sure: "Баары туурабы?",
          auth_error: "Аутентификация токенин текшерүүдө ката кетти",
-         bulk_delete_content: "%{name} чын эле жок кылгыңыз келеби? |||| %{smart_count} объектти чын эле жок кылгыңыз келеби? |||| %{smart_count} объектти чын эле жок кылгыңыз келеби?",
-         bulk_delete_title: "%{name} Жок кылуу |||| %{smart_count} %{name} Жок кылуу |||| %{smart_count} %{name} Жок кылуу",
-         bulk_update_content: "Чын эле жаңырткыңыз келеби %{name}? |||| Чын эле жаңырткыңыз келеби? %{smart_count} объектов?",
+         bulk_delete_content:
+            "%{name} чын эле жок кылгыңыз келеби? |||| %{smart_count} объектти чын эле жок кылгыңыз келеби? |||| %{smart_count} объектти чын эле жок кылгыңыз келеби?",
+         bulk_delete_title:
+            "%{name} Жок кылуу |||| %{smart_count} %{name} Жок кылуу |||| %{smart_count} %{name} Жок кылуу",
+         bulk_update_content:
+            "Чын эле жаңырткыңыз келеби %{name}? |||| Чын эле жаңырткыңыз келеби? %{smart_count} объектов?",
          bulk_update_title: "%{name} жаңыртуу |||| %{smart_count} %{name} жаңыртуу",
          clear_array_input: "Чын эле тизмени толугу менен тазалагыңыз келеби?",
          delete_content: "Бул объектти чын эле жок кылгыңыз келеби?",
@@ -267,7 +271,7 @@ const KyrgyzTranslation: TranslationMessages = {
          unsaved_changes: "Кээ бир өзгөртүүлөрүңүз сакталган жок. Чын эле аларга көңүл бургуңуз келеби?",
          access_denied: "",
          authentication_error: "",
-         select_all_limit_reached: ""
+         select_all_limit_reached: "",
       },
       navigation: {
          no_results: "Эч натыйжа табылган жок",
@@ -287,7 +291,7 @@ const KyrgyzTranslation: TranslationMessages = {
          page_rows_per_page: "Ар бир беттеги саптар:",
          skip_nav: "Мазмунга өтүү",
          no_filtered_results: "",
-         clear_filters: ""
+         clear_filters: "",
       },
       sort: {
          sort_by: "%{field} %{order} боюнча сорттоо",

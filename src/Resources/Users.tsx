@@ -24,16 +24,16 @@ import {
    useNotify,
    useGetIdentity,
    SelectField,
+   Labeled,
 } from "react-admin";
 import { useNavigate } from "react-router-dom";
-import { Stack } from "@mui/material";
+import { Avatar, Box, Stack } from "@mui/material";
 export const UsersList = () => {
    const t = useTranslate();
    const { data: userData, isPending } = useGetIdentity();
    if (isPending) return null;
    return (
       <List
-         // title={t("t.menu.fundsIn")}
          actions={
             <TopToolbar>
                <Stack
@@ -48,13 +48,23 @@ export const UsersList = () => {
                </Stack>
             </TopToolbar>
          }
-         // filters={<FilterLiveSearch  label={t("t.filter.search")} />}
       >
          <Datagrid bulkActionButtons={false} rowClick="show">
+            <FunctionField
+               render={(record) => {
+                  return (
+                     <Box>
+                        <Avatar
+                           src={record.photoURL.src}
+                           title={record.photoURL.src}
+                           alt={record.photoURL.src}
+                           sx={{ width: 24, height: 24 }}
+                        />
+                     </Box>
+                  );
+               }}
+            />
             <TextField source="firstName" label={t("t.input.fName")} />
-            {/* <TextField source="lastName" label={t("t.input.lName")} /> */}
-            {/* <TextField source="email" label={t("t.input.email")} /> */}
-            {/* <NumberField source="phone" label={t("t.input.phone")} /> */}
             <SelectField
                source="role"
                label={t("t.input.role")}
@@ -62,6 +72,7 @@ export const UsersList = () => {
                   { id: "admin", name: t("t.role.admin") },
                   { id: "donor", name: t("t.role.donor") },
                   { id: "guest", name: t("t.role.guest") },
+                  { id: "dev", name: t("t.role.dev") },
                ]}
             />
          </Datagrid>
@@ -80,7 +91,20 @@ export const UsersShow = () => {
             <TextField source="email" label={t("t.input.email")} />
             <NumberField source="phone" label={t("t.input.phone")} />
             <TextField source="role" label={t("t.input.role")} />
-            <ImageField source="photoURL.src" title="photoURL.title" label={t("t.input.photoURL")} />
+            <FunctionField
+               render={(record) => {
+                  return (
+                     <Labeled label={t("t.input.photoURL")}>
+                        <Avatar
+                           src={record.photoURL.src}
+                           title={record.photoURL.src}
+                           alt={record.photoURL.src}
+                           sx={{ width: 56, height: 56 }}
+                        />
+                     </Labeled>
+                  );
+               }}
+            />
             <FunctionField
                render={() => (
                   <Stack direction={"row"} justifyContent={"space-between"}>
@@ -118,28 +142,16 @@ export const UsersEdit = () => {
       multiple: false,
       maxSize: 500000,
    };
+
+   // if admin => false or
    return (
       <Edit>
          <SimpleForm>
-            <TextInput readOnly={userData!.role == "admin"} source="firstName" label={t("t.input.fName")} />
-            <TextInput readOnly={userData!.role == "admin"} source="lastName" label={t("t.input.lName")} />
-            <TextInput readOnly={userData!.role == "admin"} source="email" label={t("t.input.email")} />
-            <NumberInput
-               source="phone"
-               inputMode="tel"
-               readOnly={userData!.role == "admin"}
-               label={t("t.input.phone")}
-            />
-            {/* <Labeled label="Current avatar">
-               <ImageField source="photoURL.src" title="photoURL.title" />
-            </Labeled> */}
-            <ImageInput
-               readOnly={userData!.role == "admin"}
-               source="photoURL"
-               label={t("t.input.photoURL")}
-               options={DropZoneOptions}
-               accept={rules}
-            >
+            <TextInput source="firstName" label={t("t.input.fName")} />
+            <TextInput source="lastName" label={t("t.input.lName")} />
+            <TextInput source="email" label={t("t.input.email")} />
+            <NumberInput source="phone" inputMode="tel" label={t("t.input.phone")} />
+            <ImageInput source="photoURL" label={t("t.input.photoURL")} options={DropZoneOptions} accept={rules}>
                <ImageField source="src" title="title" />
             </ImageInput>
             {userData!.role !== "admin" ? null : (
@@ -152,10 +164,12 @@ export const UsersEdit = () => {
                         { id: "admin", name: t("t.role.admin") },
                         { id: "donor", name: t("t.role.donor") },
                         { id: "guest", name: t("t.role.guest") },
+                        { id: "dev", name: t("t.role.dev") },
                      ]}
                   />
                </>
             )}
+            {userData!.role !== "admin" ? null : <DeleteButton />}
          </SimpleForm>
       </Edit>
    );
