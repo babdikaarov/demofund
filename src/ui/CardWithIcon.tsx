@@ -1,8 +1,6 @@
 import { FC, createElement } from "react";
 import { Card, Box, Typography } from "@mui/material";
 import { ReactNode } from "react";
-import { useMediaQuery } from "@mui/material";
-
 interface Props {
    // eslint-disable-next-line @typescript-eslint/no-explicit-any
    icon: FC<any>;
@@ -12,9 +10,6 @@ interface Props {
 }
 
 const CardWithIcon = ({ icon, title, subtitle }: Props) => {
-   // Determine if the screen size is small (less than 650px)
-   const isSmallScreen = useMediaQuery("(max-width:650px)");
-
    return (
       <Card
          sx={{
@@ -26,7 +21,7 @@ const CardWithIcon = ({ icon, title, subtitle }: Props) => {
                textDecoration: "none",
                color: "inherit",
             },
-            minWidth: "280px",
+            // minWidth: "280px",
          }}
       >
          <Box
@@ -40,7 +35,8 @@ const CardWithIcon = ({ icon, title, subtitle }: Props) => {
                width: "100%",
                // maxWidth: "328px",
                "& .icon": {
-                  color: "secondary.main",
+                  color: "secondary",
+                  position: "absolute",
                },
                "&:before": {
                   position: "absolute",
@@ -50,7 +46,7 @@ const CardWithIcon = ({ icon, title, subtitle }: Props) => {
                   content: `''`,
                   height: "200%",
                   aspectRatio: "1",
-                  transform: "translate(-30%, -60%)",
+                  transform: "translate(-60%, -60%)",
                   borderRadius: "50%",
                   backgroundColor: "secondary.main",
                   opacity: 0.15,
@@ -61,9 +57,11 @@ const CardWithIcon = ({ icon, title, subtitle }: Props) => {
             <Box
                width="3em"
                className="icon"
-               sx={{
-                  marginRight: isSmallScreen ? "8px" : "16px",
-               }}
+               sx={
+                  {
+                     // marginRight: isSmallScreen ? "8px" : "16px",
+                  }
+               }
             >
                {createElement(icon, { fontSize: "large" })}
             </Box>

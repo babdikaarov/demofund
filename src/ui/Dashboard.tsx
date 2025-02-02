@@ -2,12 +2,15 @@ import * as React from "react";
 import Card from "@mui/material/Card";
 import { Title, useGetList, useGetOne } from "react-admin";
 import CardWithIcon from "./CardWithIcon";
-import DollarIcon from "@mui/icons-material/AttachMoney";
-import CommentIcon from "@mui/icons-material/PersonAdd";
 import "./styles/Dashboard.css";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 import { Box, Grid2 as Grid, Stack, useMediaQuery } from "@mui/material";
-import Navigation from "./Navigation";
+import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
+import VolunteerActivismIcon from "@mui/icons-material/VolunteerActivism";
+import RequestQuoteIcon from "@mui/icons-material/RequestQuote";
+import ReceiptOutlinedIcon from "@mui/icons-material/ReceiptOutlined";
+import PeopleAltOutlinedIcon from "@mui/icons-material/PeopleAltOutlined";
+import PaymentsIcon from "@mui/icons-material/Payments";
 
 export const Dashboard = () => {
    const [chartData, setChartData] = React.useState([
@@ -63,7 +66,11 @@ export const Dashboard = () => {
    }, [fundsData]);
 
    return (
-      <Card>
+      <Card
+         sx={{
+            marginBlock: "20px",
+         }}
+      >
          <Stack direction={"column"} spacing={2}>
             <Title title="Welcome to the administration" />
             <Grid
@@ -80,32 +87,44 @@ export const Dashboard = () => {
                }}
             >
                <Grid>
-                  <CardWithIcon icon={DollarIcon} title="Current Fund" subtitle={`$ ${statsData?.currentFund || 0}`} />
+                  <CardWithIcon
+                     icon={AccountBalanceIcon}
+                     title="Current Fund"
+                     subtitle={`$ ${statsData?.currentFund || 0}`}
+                  />
                </Grid>
                <Grid>
                   <CardWithIcon
-                     icon={DollarIcon}
+                     icon={PaymentsIcon}
                      title="totalDonations"
                      subtitle={`$ ${statsData?.totalDonations || 0}`}
                   />
                </Grid>
                <Grid>
-                  <CardWithIcon icon={CommentIcon} title="Total Donors" subtitle={statsData?.totalDonors || 0} />
+                  <CardWithIcon
+                     icon={PeopleAltOutlinedIcon}
+                     title="totalDonors"
+                     subtitle={statsData?.totalDonors || 0}
+                  />
                </Grid>
                <Grid>
                   <CardWithIcon
-                     icon={DollarIcon}
-                     title="Total funds"
+                     icon={VolunteerActivismIcon}
+                     title="totalSumDonations"
                      subtitle={`$ ${statsData?.totalSumDonations || 0}`}
                   />
                </Grid>
                <Grid>
-                  <CardWithIcon icon={CommentIcon} title="totalPayments" subtitle={statsData?.totalPayments || 0} />
+                  <CardWithIcon
+                     icon={RequestQuoteIcon}
+                     title="totalPayments"
+                     subtitle={statsData?.totalPayments || 0}
+                  />
                </Grid>
                <Grid>
                   <CardWithIcon
-                     icon={DollarIcon}
-                     title="Total spendings"
+                     icon={ReceiptOutlinedIcon}
+                     title="Total totalSumPayments"
                      subtitle={`$ ${statsData?.totalSumPayments || 0}`}
                   />
                </Grid>
@@ -122,7 +141,6 @@ export const Dashboard = () => {
                   </BarChart>
                </ResponsiveContainer>
             </Box>
-            <Navigation />
          </Stack>
       </Card>
    );

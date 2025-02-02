@@ -18,6 +18,7 @@ const Navigation: React.FC = () => {
    const navigate = useNavigate();
    const { data: userData, isPending } = useGetIdentity();
    if (isPending) return null;
+
    const menuItems = [
       {
          label: t("t.menu.users"),
@@ -146,7 +147,7 @@ const Navigation: React.FC = () => {
       >
          <Title title={t("t.menu.nav")} />
          {menuItems.map((item, index) => (
-            <Grid key={index} sx={{ width: "100%", aspectRatio: "1/1" }}>
+            <Grid key={index} sx={{ width: "100%", aspectRatio: "2/1" }}>
                <Link to={createPath({ resource: item.path, type: "list" })} style={{ textDecoration: "none" }}>
                   <Button
                      fullWidth
@@ -165,7 +166,7 @@ const Navigation: React.FC = () => {
                         <Typography
                            sx={{
                               fontSize: {
-                                 md: "medium",
+                                 // md:  "small",
                                  sm: "small",
                               },
                            }}
