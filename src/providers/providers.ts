@@ -7,13 +7,13 @@ import { createSingleDataDB, getSingleDataDB, rootPath } from "../Utils/utils";
 import { deleteObject, getStorage, ref } from "firebase/storage";
 
 export const config = {
-   apiKey: "AIzaSyCd1ySBmZTudXiyGxPvfOAzalJ3wNOjmLk",
-   authDomain: "kdmfund-95d8a.firebaseapp.com",
-   projectId: "kdmfund-95d8a",
-   storageBucket: "kdmfund-95d8a.firebasestorage.app",
-   messagingSenderId: "484663891678",
-   appId: "1:484663891678:web:60bb7df7f00e336040944f",
-   measurementId: "G-93FYZD1310",
+   apiKey: import.meta.env.VITE_API_KEY,
+   authDomain: import.meta.env.VITE_AUTH_DOMAIN,
+   projectId: import.meta.env.VITE_PROJECT_ID,
+   storageBucket: import.meta.env.VITE_STORAGE_BUCKET,
+   messagingSenderId: import.meta.env.VITE_MESSAGING_SENDER_ID,
+   appId: import.meta.env.VITE_APP_ID,
+   measurementId: import.meta.env.VITE_MEASUREMENT_ID,
 };
 export const app = initializeApp(config);
 export const db = getFirestore(app);

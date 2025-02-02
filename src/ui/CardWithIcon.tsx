@@ -77,7 +77,6 @@ const CardWithIcon = ({ icon, title, subtitle }: Props) => {
                   flex: 1, // Ensure it takes up the remaining space
                }}
             >
-               <Typography color="textSecondary">{title}</Typography>
                <Typography
                   variant="h5"
                   component="h2"
@@ -86,11 +85,21 @@ const CardWithIcon = ({ icon, title, subtitle }: Props) => {
                      overflow: "hidden",
                      textOverflow: "ellipsis",
                      margin: 0,
-                     minHeight: "24px",
+
                      flexShrink: 0, // Prevent subtitle from shrinking
                   }}
                >
                   {subtitle || " "}
+               </Typography>
+               <Typography
+                  color="textSecondary"
+                  sx={{
+                     minHeight: "54px",
+                     maxWidth: "150px",
+                     alignSelf: "end",
+                  }}
+               >
+                  {title}
                </Typography>
             </Box>
          </Box>

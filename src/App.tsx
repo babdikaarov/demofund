@@ -31,10 +31,9 @@ const tCallBack = (l: string) => {
    return translations[l as keyof typeof translations];
 };
 const i18nProvider = polyglotI18nProvider(tCallBack, "ru", [
-   // { locale: "kg", name: "Kyrgyz" },
+   { locale: "kg", name: "Ky" },
    { locale: "ru", name: "Ru" },
    { locale: "en", name: "En" },
-   // { locale: "tr", name: "Turkish" },
 ]);
 
 const App = () => {

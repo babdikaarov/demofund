@@ -42,18 +42,18 @@ export const Dashboard = () => {
    React.useEffect(() => {
       if (fundsData.length > 0) {
          const newChartData = [
-            { name: t("t.menu.jan", { defaultValue: "Jan" }), pv: 0, uv: 0, wv: 0 },
-            { name: t("t.menu.feb", { defaultValue: "Feb" }), pv: 0, uv: 0, wv: 0 },
-            { name: t("t.menu.mar", { defaultValue: "Mar" }), pv: 0, uv: 0, wv: 0 },
-            { name: t("t.menu.apr", { defaultValue: "Apr" }), pv: 0, uv: 0, wv: 0 },
-            { name: t("t.menu.may", { defaultValue: "May" }), pv: 0, uv: 0, wv: 0 },
-            { name: t("t.menu.jun", { defaultValue: "Jun" }), pv: 0, uv: 0, wv: 0 },
-            { name: t("t.menu.jul", { defaultValue: "Jul" }), pv: 0, uv: 0, wv: 0 },
-            { name: t("t.menu.aug", { defaultValue: "Aug" }), pv: 0, uv: 0, wv: 0 },
-            { name: t("t.menu.sep", { defaultValue: "Sep" }), pv: 0, uv: 0, wv: 0 },
-            { name: t("t.menu.oct", { defaultValue: "Oct" }), pv: 0, uv: 0, wv: 0 },
-            { name: t("t.menu.nov", { defaultValue: "Nov" }), pv: 0, uv: 0, wv: 0 },
-            { name: t("t.menu.dec", { defaultValue: "Dec" }), pv: 0, uv: 0, wv: 0 },
+            { name: t("t.month.jan", { defaultValue: "Jan" }), pv: 0, uv: 0, wv: 0 },
+            { name: t("t.month.feb", { defaultValue: "Feb" }), pv: 0, uv: 0, wv: 0 },
+            { name: t("t.month.mar", { defaultValue: "Mar" }), pv: 0, uv: 0, wv: 0 },
+            { name: t("t.month.apr", { defaultValue: "Apr" }), pv: 0, uv: 0, wv: 0 },
+            { name: t("t.month.may", { defaultValue: "May" }), pv: 0, uv: 0, wv: 0 },
+            { name: t("t.month.jun", { defaultValue: "Jun" }), pv: 0, uv: 0, wv: 0 },
+            { name: t("t.month.jul", { defaultValue: "Jul" }), pv: 0, uv: 0, wv: 0 },
+            { name: t("t.month.aug", { defaultValue: "Aug" }), pv: 0, uv: 0, wv: 0 },
+            { name: t("t.month.sep", { defaultValue: "Sep" }), pv: 0, uv: 0, wv: 0 },
+            { name: t("t.month.oct", { defaultValue: "Oct" }), pv: 0, uv: 0, wv: 0 },
+            { name: t("t.month.nov", { defaultValue: "Nov" }), pv: 0, uv: 0, wv: 0 },
+            { name: t("t.month.dec", { defaultValue: "Dec" }), pv: 0, uv: 0, wv: 0 },
          ];
 
          const uvAddedForMonth = new Array(12).fill(false); // Track whether uv has been added for a month
@@ -81,7 +81,7 @@ export const Dashboard = () => {
          }}
       >
          <Stack direction={"column"} spacing={2}>
-            <Title title="Welcome to the administration" />
+            <Title title={t("t.admin.welcome")} />
             <Grid
                container
                sx={{
@@ -98,43 +98,43 @@ export const Dashboard = () => {
                <Grid>
                   <CardWithIcon
                      icon={AccountBalanceIcon}
-                     title="Current Fund"
-                     subtitle={`$ ${statsData?.currentFund || 0}`}
+                     title={t("t.statistics.fields.cFund")}
+                     subtitle={`${statsData?.currentFund || 0} c.`}
                   />
                </Grid>
                <Grid>
                   <CardWithIcon
                      icon={PaymentsIcon}
-                     title="totalDonations"
-                     subtitle={`$ ${statsData?.totalDonations || 0}`}
+                     title={t("t.statistics.fields.tDonations")}
+                     subtitle={`${statsData?.totalDonations || 0}`}
                   />
                </Grid>
                <Grid>
                   <CardWithIcon
                      icon={PeopleAltOutlinedIcon}
-                     title="totalDonors"
+                     title={t("t.statistics.fields.tDonors")}
                      subtitle={statsData?.totalDonors || 0}
                   />
                </Grid>
                <Grid>
                   <CardWithIcon
                      icon={VolunteerActivismIcon}
-                     title="totalSumDonations"
-                     subtitle={`$ ${statsData?.totalSumDonations || 0}`}
+                     title={t("t.statistics.fields.tSumDonations")}
+                     subtitle={`${statsData?.totalSumDonations || 0} c.`}
                   />
                </Grid>
                <Grid>
                   <CardWithIcon
                      icon={RequestQuoteIcon}
-                     title="totalPayments"
+                     title={t("t.statistics.fields.tPayments")}
                      subtitle={statsData?.totalPayments || 0}
                   />
                </Grid>
                <Grid>
                   <CardWithIcon
                      icon={ReceiptOutlinedIcon}
-                     title="Total totalSumPayments"
-                     subtitle={`$ ${statsData?.totalSumPayments || 0}`}
+                     title={t("t.statistics.fields.tSumPayments")}
+                     subtitle={`${statsData?.totalSumPayments || 0} c.`}
                   />
                </Grid>
             </Grid>

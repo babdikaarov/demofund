@@ -20,7 +20,8 @@ const MyLoginForm = (props: LoginFormProps) => {
    const translate = useTranslate();
    const notify = useNotify();
 
-   const submit = (values: FormData) => {
+   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+   const submit: any = (values: FormData) => {
       setLoading(true);
       login(values, redirectTo)
          .then(() => {
@@ -170,6 +171,7 @@ const MyLoginForm = (props: LoginFormProps) => {
 
 const PREFIX = "RaLoginForm";
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const LoginFormClasses = {
    content: `${PREFIX}-content`,
    button: `${PREFIX}-button`,
@@ -178,7 +180,7 @@ export const LoginFormClasses = {
 
 const StyledForm = styled(Form, {
    name: PREFIX,
-   overridesResolver: (props, styles) => styles.root,
+   overridesResolver: (_props, styles) => styles.root,
 })(({ theme }) => ({
    [`& .${LoginFormClasses.content}`]: {
       width: 300,
