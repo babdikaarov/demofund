@@ -152,9 +152,14 @@ export const Dashboard = () => {
                      <YAxis />
                      <Tooltip />
                      <Legend />
-                     <Line type="monotone" dataKey="pv" stroke="#8884d8" name={t("t.chart.pv")} />
-                     <Line type="monotone" dataKey="uv" stroke="#82ca9d" name={t("t.chart.uv")} />
-                     <Line type="monotone" dataKey="wv" stroke="#ff7300" name={t("t.chart.wv")} />
+                     <Line type="monotone" dataKey="uv" stroke="#82ca9d" name={t("t.statistics.fields.cFund")} />
+                     <Line
+                        type="monotone"
+                        dataKey="pv"
+                        stroke="#8884d8"
+                        name={t("t.statistics.fields.tSumDonations")}
+                     />
+                     <Line type="monotone" dataKey="wv" stroke="#ff7300" name={t("t.statistics.fields.tSumPayments")} />
                   </LineChart>
                </ResponsiveContainer>
             </Box>

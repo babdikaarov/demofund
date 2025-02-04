@@ -25,6 +25,7 @@ const RussianTranslation: TranslationMessages = {
          profile: "Настройки профиля",
       },
       input: {
+         forMonth: "За месяц",
          photoURL: "photoURL",
          phone: "Phone number",
          basedOnPolls: "Основано на опросах",

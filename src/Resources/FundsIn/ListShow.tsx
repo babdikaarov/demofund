@@ -20,6 +20,7 @@ import {
    useTranslate,
    BooleanField,
    DeleteButton,
+   useLocaleState,
 } from "react-admin";
 import { Stack, useMediaQuery } from "@mui/material";
 import { PdfImageField } from "../../ui/Fields/PdfImageField";
@@ -37,13 +38,13 @@ export const FundsInList = () => {
                <TextInput label={t("t.filter.my")} source="createdBy" defaultValue={identity?.id} />,
                <TextInput
                   label={t("t.filter.month")}
-                  source="depositedAt"
+                  source="forMonth"
                   defaultValue={new Date().toISOString().slice(0, 7)}
                />,
             ]}
          />
          {/* fixme i18n */}
-         <SortButton fields={["depositedAt"]} resource="fundsIn" label={t("t.filter.sort")} />
+         <SortButton fields={["forMonth"]} resource="fundsIn" label={t("t.filter.sort")} />
          <CreateButton />
          <ExportButton />
       </TopToolbar>
@@ -59,15 +60,13 @@ export const FundsInList = () => {
                      <TextField source="firstName" />
                   </ReferenceField>
                }
-               rightIcon={() => (
-                  <MyFileField recordKey="depositedAt" label={t("t.input.reciept")} source="reciept.src" />
-               )}
+               rightIcon={() => <MyFileField recordKey="forMonth" label={t("t.input.reciept")} source="reciept.src" />}
                rowClick={() => "show"}
                // rowSx={(record) => ({ backgroundColor: record.nb_views >= 500 ? "#efe" : "white" })}
             />
          ) : (
             <Datagrid bulkActionButtons={false} rowClick="show">
-               <MyFileField recordKey="depositedAt" source="reciept.src" label={t("t.input.reciept")} />
+               <MyFileField recordKey="forMonth" source="reciept.src" label={t("t.input.reciept")} />
                {/* <DateFiel label="Reciept"d source="depositedAt" /> */}
                <ReferenceField source={`createdBy`} reference="users" label={t("t.input.createdBy")}>
                   <TextField source="firstName" />
@@ -83,12 +82,33 @@ export const FundsInList = () => {
 export const FundsInShow = () => {
    const navigate = useNavigate();
    const t = useTranslate();
+   const [locale] = useLocaleState();
+   console.log(locale);
+
    return (
       <Show>
          <SimpleShowLayout>
-            <TextField source="id" label={t("t.input.amount")} />
+            <TextField source="id" />
             <TextField source="amount" label={t("t.input.amount")} />
-            <DateField source="depositedAt" label={t("t.input.depositedAt")} />
+            <DateField
+               source="depositedAt"
+               options={{
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+               }}
+               locales={locale}
+               label={t("t.input.depositedAt")}
+            />
+            <DateField
+               source="forMonth"
+               options={{
+                  year: "numeric",
+                  month: "long",
+               }}
+               locales={locale}
+               label={t("t.input.forMonth")}
+            />
             <ReferenceField source={`createdBy`} label={t("t.input.createdBy")} reference="users">
                <TextField source="firstName" />
             </ReferenceField>

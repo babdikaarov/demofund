@@ -80,6 +80,14 @@ export const FundsInCreate = () => {
                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                onClick={(e: any) => e.target.showPicker()}
             />
+            <DateInput
+               source="forMonth"
+               label={t("t.input.forMonth")}
+               validate={minValue("2025-01-01")}
+               type="month"
+               // eslint-disable-next-line @typescript-eslint/no-explicit-any
+               onClick={(e: any) => e.target.showPicker()}
+            />
             <ImageInput
                validate={required()}
                source="reciept"

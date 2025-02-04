@@ -101,6 +101,14 @@ export const FundsInEdit = () => {
                onClick={(e: any) => e.target.showPicker()}
                readOnly={record.isVerified || record.createdBy !== identity?.id}
             />
+            <DateInput
+               source="forMonth"
+               label={t("t.input.forMonth")}
+               readOnly={record.isVerified || record.createdBy !== identity?.id}
+               type="month"
+               // eslint-disable-next-line @typescript-eslint/no-explicit-any
+               onClick={(e: any) => e.target.showPicker()}
+            />
             <FileInput
                validate={required()}
                source="reciept"

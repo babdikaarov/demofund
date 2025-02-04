@@ -13,7 +13,6 @@ import {
    SimpleShowLayout,
    FunctionField,
    Button,
-   DeleteButton,
    useGetIdentity,
    TopToolbar,
    FilterLiveSearch,
@@ -89,7 +88,6 @@ export const BeneficiariesShow: React.FC = () => {
                         size="large"
                         onClick={() => navigate("/beneficiaries")}
                      />
-                     <DeleteButton />
                   </Stack>
                )}
             />
@@ -120,8 +118,6 @@ export const BeneficiariesCreate: React.FC = () => {
             <TextInput source="firstName" label={t("t.input.fName")} />
             <TextInput source="lastName" label={t("t.input.lName")} />
             <TextInput inputMode="tel" source="phone" label={t("t.input.phone")} />
-            {/* <NumberInput inputMode="numeric" source="totalBenefit" label={t("t.input.totalBenefit")} />
-            <NumberInput inputMode="numeric" source="totalGrants" label={t("t.input.totalGrants")} /> */}
          </SimpleForm>
       </Create>
    );

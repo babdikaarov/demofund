@@ -25,6 +25,7 @@ const KyrgyzTranslation: TranslationMessages = {
          profile: "Профиль жөндөөлөрү",
       },
       input: {
+         forMonth: "Which month",
          photoURL: "Сүрөт URL",
          phone: "Телефон номери",
          basedOnPolls: "Сурамжылоолорго негизделген",

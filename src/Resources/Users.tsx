@@ -9,7 +9,6 @@ import {
    TextInput,
    required,
    Edit,
-   DeleteButton,
    FunctionField,
    Button,
    FilterLiveSearch,
@@ -109,7 +108,6 @@ export const UsersShow = () => {
                render={() => (
                   <Stack direction={"row"} justifyContent={"space-between"}>
                      <Button type="button" label={t("t.button.back")} size="large" onClick={() => navigate("/users")} />
-                     <DeleteButton />
                   </Stack>
                )}
             />
@@ -169,7 +167,6 @@ export const UsersEdit = () => {
                   />
                </>
             )}
-            {userData!.role !== "admin" ? null : <DeleteButton />}
          </SimpleForm>
       </Edit>
    );

@@ -25,6 +25,7 @@ const englishMessages: TranslationMessages = {
          profile: "Profile settings",
       },
       input: {
+         forMonth: "Which month",
          photoURL: "Photo URL",
          phone: "Phone number",
          basedOnPolls: "Based on polls",
