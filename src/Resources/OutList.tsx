@@ -37,7 +37,7 @@ export const FundsOutList = () => {
          <Datagrid bulkActionButtons={false}>
             <TextField source="amount" label={t("t.input.amount")} />
             <DateField source="createdAt" label={t("t.input.createdAt")} />
-            <MyFileField recordKey="givenAt" source="reciept.src" label={t("t.input.reciept")} />
+            <MyFileField recordKey="givenAt" source="reciept" label={t("t.input.reciept")} />
             <ReferenceField source={`beneficiariesId`} reference="beneficiaries" label={t("t.input.beneficiar")}>
                <TextField source="firstName" />
             </ReferenceField>

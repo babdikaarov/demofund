@@ -124,7 +124,7 @@ const Navigation: React.FC = () => {
       try {
          const success = await calculateStats();
          if (success) {
-            navigate("/stats");
+            navigate("/");
          }
       } catch (error) {
          console.error(error);

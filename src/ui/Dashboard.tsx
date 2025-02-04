@@ -15,63 +15,66 @@ import PaymentsIcon from "@mui/icons-material/Payments";
 export const Dashboard = () => {
    const { data: statsData } = useGetOne("stats", { id: 1 });
    const { data: fundsData = [] } = useGetList("fundsIn");
+   const { data: fundsOutData = [] } = useGetList("fundsOut"); // Added fundsOut data
    const isSmallScreen = useMediaQuery("(max-width:650px)");
    const t = useTranslate(); // Use translate function
    const [chartData, setChartData] = React.useState([
-      { name: "Jan", pv: 0 },
-      { name: "Feb", pv: 0 },
-      { name: "Mar", pv: 0 },
-      { name: "Apr", pv: 0 },
-      { name: "May", pv: 0 },
-      { name: "Jun", pv: 0 },
-      { name: "Jul", pv: 0 },
-      { name: "Aug", pv: 0 },
-      { name: "Sep", pv: 0 },
-      { name: "Oct", pv: 0 },
-      { name: "Nov", pv: 0 },
-      { name: "Dec", pv: 0 },
+      { name: "Jan", pv: 0, uv: 0, wv: 0, qp: 0, qw: 0 },
+      { name: "Feb", pv: 0, uv: 0, wv: 0, qp: 0, qw: 0 },
+      { name: "Mar", pv: 0, uv: 0, wv: 0, qp: 0, qw: 0 },
+      { name: "Apr", pv: 0, uv: 0, wv: 0, qp: 0, qw: 0 },
+      { name: "May", pv: 0, uv: 0, wv: 0, qp: 0, qw: 0 },
+      { name: "Jun", pv: 0, uv: 0, wv: 0, qp: 0, qw: 0 },
+      { name: "Jul", pv: 0, uv: 0, wv: 0, qp: 0, qw: 0 },
+      { name: "Aug", pv: 0, uv: 0, wv: 0, qp: 0, qw: 0 },
+      { name: "Sep", pv: 0, uv: 0, wv: 0, qp: 0, qw: 0 },
+      { name: "Oct", pv: 0, uv: 0, wv: 0, qp: 0, qw: 0 },
+      { name: "Nov", pv: 0, uv: 0, wv: 0, qp: 0, qw: 0 },
+      { name: "Dec", pv: 0, uv: 0, wv: 0, qp: 0, qw: 0 },
    ]);
 
    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-   const getMonth = (el: any) => {
-      if (!el.depositedAt) return 0; // fallback for invalid date
-      const date = new Date(el.depositedAt);
+   const getMonth = (data: any) => {
+      if (!data) return 0; // fallback for invalid date
+      const date = new Date(data);
       return date.getUTCMonth(); // 0 = Jan, 1 = Feb, ..., 11 = Dec
    };
 
    React.useEffect(() => {
-      if (fundsData.length > 0) {
+      if (fundsData.length > 0 || fundsOutData.length > 0) {
          const newChartData = [
-            { name: t("t.month.jan", { defaultValue: "Jan" }), pv: 0, uv: 0, wv: 0 },
-            { name: t("t.month.feb", { defaultValue: "Feb" }), pv: 0, uv: 0, wv: 0 },
-            { name: t("t.month.mar", { defaultValue: "Mar" }), pv: 0, uv: 0, wv: 0 },
-            { name: t("t.month.apr", { defaultValue: "Apr" }), pv: 0, uv: 0, wv: 0 },
-            { name: t("t.month.may", { defaultValue: "May" }), pv: 0, uv: 0, wv: 0 },
-            { name: t("t.month.jun", { defaultValue: "Jun" }), pv: 0, uv: 0, wv: 0 },
-            { name: t("t.month.jul", { defaultValue: "Jul" }), pv: 0, uv: 0, wv: 0 },
-            { name: t("t.month.aug", { defaultValue: "Aug" }), pv: 0, uv: 0, wv: 0 },
-            { name: t("t.month.sep", { defaultValue: "Sep" }), pv: 0, uv: 0, wv: 0 },
-            { name: t("t.month.oct", { defaultValue: "Oct" }), pv: 0, uv: 0, wv: 0 },
-            { name: t("t.month.nov", { defaultValue: "Nov" }), pv: 0, uv: 0, wv: 0 },
-            { name: t("t.month.dec", { defaultValue: "Dec" }), pv: 0, uv: 0, wv: 0 },
+            { name: t("t.month.jan", { defaultValue: "Jan" }), pv: 0, uv: 0, wv: 0, qp: 0, qw: 0 },
+            { name: t("t.month.feb", { defaultValue: "Feb" }), pv: 0, uv: 0, wv: 0, qp: 0, qw: 0 },
+            { name: t("t.month.mar", { defaultValue: "Mar" }), pv: 0, uv: 0, wv: 0, qp: 0, qw: 0 },
+            { name: t("t.month.apr", { defaultValue: "Apr" }), pv: 0, uv: 0, wv: 0, qp: 0, qw: 0 },
+            { name: t("t.month.may", { defaultValue: "May" }), pv: 0, uv: 0, wv: 0, qp: 0, qw: 0 },
+            { name: t("t.month.jun", { defaultValue: "Jun" }), pv: 0, uv: 0, wv: 0, qp: 0, qw: 0 },
+            { name: t("t.month.jul", { defaultValue: "Jul" }), pv: 0, uv: 0, wv: 0, qp: 0, qw: 0 },
+            { name: t("t.month.aug", { defaultValue: "Aug" }), pv: 0, uv: 0, wv: 0, qp: 0, qw: 0 },
+            { name: t("t.month.sep", { defaultValue: "Sep" }), pv: 0, uv: 0, wv: 0, qp: 0, qw: 0 },
+            { name: t("t.month.oct", { defaultValue: "Oct" }), pv: 0, uv: 0, wv: 0, qp: 0, qw: 0 },
+            { name: t("t.month.nov", { defaultValue: "Nov" }), pv: 0, uv: 0, wv: 0, qp: 0, qw: 0 },
+            { name: t("t.month.dec", { defaultValue: "Dec" }), pv: 0, uv: 0, wv: 0, qp: 0, qw: 0 },
          ];
 
-         const uvAddedForMonth = new Array(12).fill(false); // Track whether uv has been added for a month
-
          fundsData.forEach((el) => {
-            const monthIndex = getMonth(el);
-            newChartData[monthIndex].pv += el.amount;
+            const monthIndex = getMonth(el.forMonth);
 
-            // Only add the uv value once for each month
-            if (!uvAddedForMonth[monthIndex]) {
-               newChartData[monthIndex].uv += statsData.currentFund;
-               newChartData[monthIndex].wv += statsData.totalSumPayments;
-               uvAddedForMonth[monthIndex] = true;
-            }
+            newChartData[monthIndex].qp += 1; //qty donation
+            newChartData[monthIndex].pv += el.amount; //sumdonation
+            newChartData[monthIndex].uv += el.amount; // sum cur fung
          });
+
+         fundsOutData.forEach((el) => {
+            const monthIndex = getMonth(el.givenAt);
+            newChartData[monthIndex].qw += 1;
+            newChartData[monthIndex].wv += el.amount;
+            newChartData[monthIndex].uv -= el.amount;
+         });
+
          setChartData(newChartData);
       }
-   }, [fundsData, statsData, t]); // Ensure statsData is considered as a dependency
+   }, [fundsData, fundsOutData, statsData, t]); // Ensure statsData is considered as a dependency
    const { data: userIdentity, isPending } = useGetIdentity();
    if (isPending) return null;
    if (userIdentity!.role == "guest") return null;
@@ -160,6 +163,22 @@ export const Dashboard = () => {
                         name={t("t.statistics.fields.tSumDonations")}
                      />
                      <Line type="monotone" dataKey="wv" stroke="#ff7300" name={t("t.statistics.fields.tSumPayments")} />
+                  </LineChart>
+               </ResponsiveContainer>
+               <ResponsiveContainer width="100%" height={isSmallScreen ? 250 : 300}>
+                  <LineChart
+                     width={730}
+                     height={250}
+                     data={chartData}
+                     margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                  >
+                     <CartesianGrid strokeDasharray="3 3" />
+                     <XAxis dataKey="name" />
+                     <YAxis />
+                     <Tooltip />
+                     <Legend />
+                     <Line type="monotone" dataKey="qp" stroke="#8824d8" name={t("t.statistics.fields.tDonations")} />
+                     <Line type="monotone" dataKey="qw" stroke="#ff24d8" name={t("t.statistics.fields.tPayments")} />
                   </LineChart>
                </ResponsiveContainer>
             </Box>
