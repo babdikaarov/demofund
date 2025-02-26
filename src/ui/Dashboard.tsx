@@ -59,22 +59,34 @@ export const Dashboard = () => {
 
          fundsData.forEach((el) => {
             const monthIndex = getMonth(el.forMonth);
-
-            newChartData[monthIndex].qp += 1; //qty donation
-            newChartData[monthIndex].pv += el.amount; //sumdonation
-            newChartData[monthIndex].uv += el.amount; // sum cur fung
+            newChartData[monthIndex].qp += 1; // Quantity of donations
+            newChartData[monthIndex].pv += el.amount; // Sum of donations
          });
 
          fundsOutData.forEach((el) => {
             const monthIndex = getMonth(el.givenAt);
-            newChartData[monthIndex].qw += 1;
-            newChartData[monthIndex].wv += el.amount;
-            newChartData[monthIndex].uv -= el.amount;
+            newChartData[monthIndex].qw += 1; // Quantity of withdrawals
+            newChartData[monthIndex].wv += el.amount; // Sum of withdrawals
          });
+
+         // Accumulate `uv` (current fund balance)
+         let cumulativeFund = 0;
+         for (let i = 0; i < newChartData.length; i++) {
+            const month = newChartData[i];
+
+            // Stop iteration if the month has no transactions
+            if (month.pv === 0 && month.wv === 0 && i !== 0) {
+               break;
+            }
+
+            cumulativeFund += month.pv; // Add donations for the month
+            cumulativeFund -= month.wv; // Subtract withdrawals for the month
+            month.uv = cumulativeFund; // Update the current fund balance
+         }
 
          setChartData(newChartData);
       }
-   }, [fundsData, fundsOutData, statsData, t]); // Ensure statsData is considered as a dependency
+   }, [fundsData, fundsOutData, statsData, t]);
    const { data: userIdentity, isPending } = useGetIdentity();
    if (isPending) return null;
    if (userIdentity!.role == "guest") return null;

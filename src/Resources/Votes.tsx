@@ -11,7 +11,6 @@ import {
    Create,
    useGetIdentity,
    useNotify,
-   Button,
    FunctionField,
    ReferenceInput,
    SelectInput,
@@ -33,7 +32,7 @@ import {
 } from "react-admin";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Stack } from "@mui/material";
+import { Stack, Button } from "@mui/material";
 
 export const VotesList = () => {
    const t = useTranslate();
@@ -175,8 +174,12 @@ const VotesEditLayout = () => {
          <FunctionField
             render={() => (
                <Stack direction={"row"} justifyContent={"space-between"}>
-                  <Button type="button" label={t("t.button.back")} size="large" onClick={() => navigate("/votes")} />
-                  <Button type="button" label={t("t.button.vote")} size="large" onClick={handleClick} />
+                  <Button type="button" size="large" onClick={() => navigate("/votes")}>
+                     {t("t.button.back")}
+                  </Button>
+                  <Button type="button" size="large" onClick={handleClick}>
+                     {t("t.button.vote")}
+                  </Button>
                   <Confirm
                      isOpen={open}
                      loading={isPending}
