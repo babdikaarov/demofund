@@ -7,7 +7,7 @@ import { Avatar, Button, CardContent, CircularProgress, Divider, Stack } from "@
 import { Form, required, useTranslate, useLogin, useNotify } from "ra-core";
 import { TextInput } from "react-admin";
 import googleIcon from "../assets/google-icon.svg";
-import { checkCollectionHasDocuments, createSingleDataDB, getSingleDataDB, handleGoogleLogin } from "../Utils/utils";
+import {  createSingleDataDB, getSingleDataDB, handleGoogleLogin } from "../Utils/utils";
 import ResetDialog from "./ResetDialog";
 import RegisterDialog from "./RegisterDialog";
 import { serverTimestamp } from "firebase/firestore";
@@ -69,14 +69,14 @@ const MyLoginForm = (props: LoginFormProps) => {
             window.location.href = "/";
          } else {
             try {
-               const userCollection = await checkCollectionHasDocuments("users");
+               // const userCollection = await checkCollectionHasDocuments("users");
                // console.log(userCollection);
-               let role;
-               if (userCollection) {
-                  role = "guest";
-               } else {
-                  role = "admin";
-               }
+               const role = "admin";
+               // if (userCollection) {
+               //    role = "guest";
+               // } else {
+               //    role = "admin";
+               // }
                // console.log(role);
 
                const userData = {

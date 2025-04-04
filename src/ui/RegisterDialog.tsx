@@ -1,6 +1,6 @@
 import { Dialog, DialogActions, DialogContent, DialogTitle, Button, TextField, Typography } from "@mui/material";
 import { useState } from "react";
-import { checkCollectionHasDocuments, createSingleDataDB, createUserAuthentication } from "../Utils/utils";
+import { createSingleDataDB, createUserAuthentication } from "../Utils/utils";
 import { NotificationType, useNotify, useTranslate } from "react-admin";
 import { useFormContext } from "../Utils/useFormContext";
 import { defaultFormState } from "../Utils/constants";
@@ -46,14 +46,14 @@ const RegisterDialog: React.FC<{ disabled: boolean }> = ({ disabled }) => {
       const result = await createUserAuthentication(state.email, state.password);
       // // console.log(result);
       if (!result.error && result.user) {
-         const userCollection = await checkCollectionHasDocuments("users");
+         // const userCollection = await checkCollectionHasDocuments("users");
          // console.log(userCollection);
-         let role;
-         if (userCollection) {
-            role = "guest";
-         } else {
-            role = "admin";
-         }
+         const role = "admin";
+         // if (userCollection) {
+         //    role = "guest";
+         // } else {
+         //    role = "admin";
+         // }
          // console.log("create userdata obbject");
          const userData = {
             id: result.user.uid,

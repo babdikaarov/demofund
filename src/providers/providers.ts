@@ -20,7 +20,7 @@ export const db = getFirestore(app);
 export const auth = getAuth(app);
 
 const storage = getStorage(app);
-export const rootFireBaseDBPath = "root-production/apiv1";
+export const rootFireBaseDBPath = "root-demo/apiv1";
 const options: RAFirebaseOptions = {
    logging: false,
    rootRef: rootFireBaseDBPath,
