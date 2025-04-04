@@ -60,7 +60,7 @@ export const authProvider = {
    async login(params: any) {
       try {
          const userCredential = await baseAuthProvider.login(params);
-         console.log(userCredential);
+         // // console.log(userCredential);
 
          const user = userCredential.user;
          if (!user) {
@@ -153,9 +153,7 @@ export const authProvider = {
             polls: ["create", "edit", "list", "show"],
             users: ["edit", "list", "show"],
          },
-         guest: {
-            users: ["list", "edit", "show"],
-         },
+         guest: {},
       };
       const resourcePermissions = rolePermissions[userData.role][resource] || [];
       const hasPermission = resourcePermissions.includes(action);
@@ -241,13 +239,12 @@ export const dataProvider = {
    async delete(resource: string, params: DeleteParams) {
       const { id, previousData } = params;
       // update stats
-      console.log(params);
+      // // console.log(params);
 
       if (resource in StatsRelUpdateResources) {
          const stats = "stats";
          const currentStats = await getSingleDataDB(stats, "1");
          const field = StatsRelUpdateResources[resource];
-         console.log();
 
          const currentData = currentStats.snap!;
          const totalDonors = currentData.totalDonors;
@@ -266,7 +263,7 @@ export const dataProvider = {
          }
          if (resource == "fundsIn") {
             const isVerifed = previousData[field];
-            console.log(isVerifed);
+            // // console.log(isVerifed);
 
             if (isVerifed) {
                await createSingleDataDB(stats, "1", {
@@ -278,7 +275,7 @@ export const dataProvider = {
          }
          if (resource == "fundsOut") {
             const amount = previousData[field];
-            console.log(amount);
+            // console.log(amount);
             await createSingleDataDB(stats, "1", {
                totalPayments: totalPayments == 0 ? 0 : totalPayments - 1,
                totalSumPayments: totalSumPayments - amount,
@@ -293,7 +290,7 @@ export const dataProvider = {
             const fileRef = ref(storage, previousData[fileField].src);
             try {
                await deleteObject(fileRef);
-               console.log(`File with id:${id} deleted successfully`);
+               // console.log(`File with id:${id} deleted successfully`);
             } catch (error) {
                console.error(`Error deleting file id:${id}`, error);
             }
@@ -305,7 +302,7 @@ export const dataProvider = {
    // eslint-disable-next-line @typescript-eslint/no-explicit-any
    async update(resource: string, params: UpdateParams): Promise<{ data: any }> {
       const { id, previousData, data } = params;
-      console.log(`Updating record with ID: ${id}`);
+      // console.log(`Updating record with ID: ${id}`);
 
       // handle avatar change and full name
 
@@ -315,7 +312,7 @@ export const dataProvider = {
          }
          if (previousData.email !== data.email) {
             updateEmail(auth.currentUser!, data.email).then(() => {
-               console.log("email updated");
+               // console.log("email updated");
             });
          }
       }
@@ -323,22 +320,22 @@ export const dataProvider = {
       // handle stats update
       if (resource in StatsRelUpdateResources) {
          const stats = "stats";
-         console.log("updating resoruce", resource, ":", StatsRelUpdateResources);
+         // console.log("updating resoruce", resource, ":", StatsRelUpdateResources);
 
          const currentStats = await getSingleDataDB(stats, "1");
          const field = StatsRelUpdateResources[resource];
-         console.log(currentStats);
-         console.log(field);
+         // console.log(currentStats);
+         // console.log(field);
 
          if (currentStats.exists) {
             const currentData = currentStats.snap!;
-            console.log(currentData);
+            // console.log(currentData);
             const totalDonors = currentData.totalDonors;
             const totalSumDonations = currentData.totalSumDonations;
             const currentFund = currentData.currentFund;
             const totalDonations = currentData.totalDonations;
             const totalSumPayments = currentData.totalSumPayments;
-            console.log(previousData[field], " ", data[field]);
+            // console.log(previousData[field], " ", data[field]);
 
             if (resource == "users") {
                if (previousData[field] === "guest" && data[field] !== "guest") {
@@ -353,16 +350,16 @@ export const dataProvider = {
                }
             }
             if (resource == "fundsIn") {
-               console.log(previousData[field]);
+               // console.log(previousData[field]);
                if (!previousData[field] && data[field]) {
-                  console.log("adding donor to totalDonors");
+                  // console.log("adding donor to totalDonors");
                   await createSingleDataDB(stats, "1", {
                      totalDonations: totalDonations + 1,
                      totalSumDonations: totalSumDonations + previousData.amount,
                      currentFund: currentFund + previousData.amount,
                   });
                } else if (previousData[field] && !data[field]) {
-                  console.log("removing donor from totalDonors");
+                  // console.log("removing donor from totalDonors");
                   await createSingleDataDB(stats, "1", {
                      totalDonations: totalDonations == 0 ? 0 : totalDonations - 1,
                      totalSumDonations: totalSumDonations - previousData["amount"],
@@ -388,7 +385,7 @@ export const dataProvider = {
                if (previousData[fileField]?.src) {
                   const oldFileRef = ref(storage, previousData[fileField].src);
                   await deleteObject(oldFileRef);
-                  console.log("Old file deleted successfully");
+                  // console.log("Old file deleted successfully");
                }
             } catch (error) {
                console.error("Error deleting old file:", error);

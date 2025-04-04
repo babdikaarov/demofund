@@ -44,17 +44,17 @@ const RegisterDialog: React.FC<{ disabled: boolean }> = ({ disabled }) => {
       setMyState((p) => ({ ...p, isSubmitting: true }));
 
       const result = await createUserAuthentication(state.email, state.password);
-      // console.log(result);
+      // // console.log(result);
       if (!result.error && result.user) {
          const userCollection = await checkCollectionHasDocuments("users");
-         console.log(userCollection);
+         // console.log(userCollection);
          let role;
          if (userCollection) {
             role = "guest";
          } else {
             role = "admin";
          }
-         console.log("create userdata obbject");
+         // console.log("create userdata obbject");
          const userData = {
             id: result.user.uid,
             createdBy: result.user.uid,

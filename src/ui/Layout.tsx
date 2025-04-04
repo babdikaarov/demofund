@@ -5,6 +5,7 @@ import {
    LocalesMenuButton,
    Logout,
    useGetIdentity,
+   useLogout,
    UserMenu,
    useTranslate,
    useUserMenu,
@@ -20,7 +21,13 @@ import PinchIcon from "@mui/icons-material/Pinch";
 
 export const MyLayout = ({ children }: LayoutProps) => {
    const { data: userData, isPending } = useGetIdentity();
+   const logout = useLogout();
    if (isPending) return null;
+
+   if (userData == undefined) {
+      logout();
+      return null;
+   }
    return (
       <Layout appBar={MyAppBar} menu={MyMenu}>
          {children}
@@ -46,7 +53,6 @@ export const MyLayout = ({ children }: LayoutProps) => {
       </Layout>
    );
 };
-
 
 // import MyUserMenu from "./MyUserMenu"; 996704999477
 const MyAppBar = () => (

@@ -30,7 +30,14 @@ import Dashboard from "./ui/Dashboard";
 const tCallBack = (l: string) => {
    return translations[l as keyof typeof translations];
 };
-const i18nProvider = polyglotI18nProvider(tCallBack, "ru", [
+const getBrowserLanguage = () => {
+   const browserLang = navigator.languages ? navigator.languages[0] : navigator.language;
+   const languageCode = browserLang.split(/[-_]/)[0].toLowerCase();
+   const supportedLanguages = ["kg", "ru", "en"];
+   return supportedLanguages.includes(languageCode) ? languageCode : "ru";
+};
+// // console.log(getBrowserLanguage());
+const i18nProvider = polyglotI18nProvider(tCallBack, getBrowserLanguage(), [
    { locale: "kg", name: "Ky" },
    { locale: "ru", name: "Ru" },
    { locale: "en", name: "En" },

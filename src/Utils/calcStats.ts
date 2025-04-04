@@ -39,7 +39,7 @@ export const calculateStats = async () => {
          totalSumPayments,
       };
 
-      console.log("✅ Calculated Stats:", statsData);
+      // console.log("✅ Calculated Stats:", statsData);
 
       // Store in Firestore at `stats/1`
       await createSingleDataDB("stats", "1", statsData);

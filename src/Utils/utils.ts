@@ -106,7 +106,7 @@ export const getCollectionDataDB = async (path: string) => {
       const colSnap = await getDocs(colRef);
 
       if (colSnap.empty) {
-         console.log(`⚠️ No documents found in collection: ${path}`);
+         // console.log(`⚠️ No documents found in collection: ${path}`);
          return { exists: false, data: [] };
       }
 
@@ -115,7 +115,7 @@ export const getCollectionDataDB = async (path: string) => {
          ...doc.data(),
       }));
 
-      console.log(`✅ Retrieved ${data.length} documents from ${path}`);
+      // console.log(`✅ Retrieved ${data.length} documents from ${path}`);
       return { exists: true, data };
    } catch (error) {
       console.error(`❌ Error retrieving collection (${path}):`, error);

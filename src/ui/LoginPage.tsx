@@ -70,14 +70,14 @@ const MyLoginForm = (props: LoginFormProps) => {
          } else {
             try {
                const userCollection = await checkCollectionHasDocuments("users");
-               console.log(userCollection);
+               // console.log(userCollection);
                let role;
                if (userCollection) {
                   role = "guest";
                } else {
                   role = "admin";
                }
-               console.log(role);
+               // console.log(role);
 
                const userData = {
                   id: user.uid,
@@ -96,7 +96,7 @@ const MyLoginForm = (props: LoginFormProps) => {
                   },
                   role: role,
                };
-               console.log("processing user:", user);
+               // console.log("processing user:", user);
 
                const res = await createSingleDataDB("users", result.user.uid, userData);
                localStorage.setItem(`userData:${res.data.id}`, JSON.stringify(res.data));

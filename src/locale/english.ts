@@ -3,6 +3,10 @@ import { TranslationMessages } from "ra-core";
 const englishMessages: TranslationMessages = {
    t: {
       notification: {
+         wait: {
+            note1: "Access to this platform is granted only after authorization by an administrator.",
+            note2: "Since you are here, it means that the administrator has notified you to visit this platform. Please notify the administrator about your registration so that they can authorize you to proceed."
+         },
          vote: {
             eligable: "You are not eligible to vote in this poll",
             voteExist: "You have already voted in this poll",

@@ -54,7 +54,7 @@ export const FundsInEdit = () => {
    const DropZoneOptions: any = {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       onDropRejected: (file: { file: File; errors: any[] }[]) => {
-         console.log(file);
+         // console.log(file);
 
          const options = {
             userFile: (file[0].file.size / 1000000).toFixed(2),

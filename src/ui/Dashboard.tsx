@@ -4,7 +4,7 @@ import { Title, useGetIdentity, useGetList, useGetOne, useTranslate } from "reac
 import CardWithIcon from "./CardWithIcon";
 import "./styles/Dashboard.css";
 import { XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LineChart, Line } from "recharts";
-import { Box, Grid2 as Grid, Stack, useMediaQuery } from "@mui/material";
+import { Box, Grid2 as Grid, Stack, Typography, useMediaQuery } from "@mui/material";
 import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 import VolunteerActivismIcon from "@mui/icons-material/VolunteerActivism";
 import RequestQuoteIcon from "@mui/icons-material/RequestQuote";
@@ -89,7 +89,18 @@ export const Dashboard = () => {
    }, [fundsData, fundsOutData, statsData, t]);
    const { data: userIdentity, isPending } = useGetIdentity();
    if (isPending) return null;
-   if (userIdentity!.role == "guest") return null;
+   if (userIdentity!.role == "guest") {
+      return (
+         <Box display="flex" justifyContent="center" flexDirection={"column"} alignItems="center" height="100%">
+            <Typography variant="h6" color="warning.main" align="center" gutterBottom>
+               {t("t.notification.wait.note1")}
+            </Typography>
+            <Typography variant="body1" color="text.secondary" align="center">
+               {t("t.notification.wait.note2")}
+            </Typography>
+         </Box>
+      );
+   }
    return (
       <Card
          sx={{
